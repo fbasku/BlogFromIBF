@@ -27,4 +27,5 @@ public class DataLoader implements ApplicationRunner {
         user2.setAdmin(true);
         userRepository.save(user2);
     }
+
 }
