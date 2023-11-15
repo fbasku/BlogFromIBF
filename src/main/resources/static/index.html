@@ -32,32 +32,23 @@
 
     <div class="form-container">
         <div class="login-box">
-                <form hx-post="http://localhost:8080/login"
-                      nunjucks-template="login-successful"
-                      hx-target=".form-container"
-                      hx-target-4*="#error-box-login">
-                    <h2>Login</h2>
-                    <label for="username">username</label>
-                    <input type="text" id="username" name="username" value="user1">
-                    <label for="password">password</label>
-                    <input type="password" id="password" name="password" value="12345">
-                    <button type="submit">Submit</button>
-                    <div id="error-box-login"></div>
-                </form>
-            </div>
+            <form hx-post="http://localhost:8080/login"
+                  nunjucks-template="login-successful"
+                  hx-target=".form-container"
+                  hx-target-4*="#error-box-login">
+                <h2>Login</h2>
+                <label for="username">username</label>
+                <input type="text" id="username" name="username">
+                <label for="password">password</label>
+                <input type="password" id="password" name="password">
+                <button type="submit">Submit</button>
+                <div id="error-box-login"></div>
+            </form>
+            <p>Noch kein Mitglied? <a href="registrierung.html">Hier registrieren</a></p>
         </div>
     </div>
 </template>
 
-<!-- These templates must not be nested in above template because it already would be interpolated as part of the GET user response -->
-<template id="login-template">
-    {% if error %}
-    <h3>⚠️ Error ⚠️</h3>
-    <code>{{ message }}</code>
-    {% else %}
-    <!-- If no error, register view disappears. User can proceed with login -->
-    {% endif %}
-</template>
 
 <template id="login-successful">
     {% if error %}
