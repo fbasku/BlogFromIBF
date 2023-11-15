@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,30 +14,26 @@
     <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
     <script src="templates/javascript-helpers.js"></script>
-
     <link rel="stylesheet" href="index.css">
-
 </head>
 <body hx-ext="client-side-templates, response-targets, json-enc">
 
 <h1>Blog-Einträge</h1>
 <div hx-get="http://localhost:8080/artikel"
-        hx-target="#Eintrag"
-        hx-trigger="load"
-        nunjucks-template="Blog-template">Blog-Eintrag</div>
-<hr>
+     hx-target="#Eintrag"
+     nunjucks-template="Blog-template"
+     hx-trigger="load"></div>
 <section id="Eintrag">
-
+Hier sind die Blogeinträge
 </section>
 
 <template id="Blog-template">
-    {% for Eintrag in Blogartikel %}
-    <ul>
-        <p>{{titel}}</p><br>
-        <p>{{inhalt}}</p>
-        <div><img src="{{bildUrl}}" width="500rem" alt="{{titel}}"></div>
-    </ul>
-    {% endfor %}}
+    <p>I need help pls help me</p>
+    {% for eintrag in Baho %}
+        <p>{{ Titel }}</p>
+        <p>{{ eintrag.inhalt }}</p>
+        <div><img src="{{ eintrag.bildUrl }}" width="500rem" alt="{{eintrag.titel}}"></div>
+    {% endfor %}
 </template>
 
 </body>
