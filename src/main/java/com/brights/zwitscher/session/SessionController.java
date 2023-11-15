@@ -1,5 +1,7 @@
 package com.brights.zwitscher.session;
 
+import com.brights.zwitscher.user.registrierung.RegistrierungRequestDTO;
+import com.brights.zwitscher.user.registrierung.RegistrierungResponseDTO;
 import com.brights.zwitscher.user.User;
 import com.brights.zwitscher.user.UserRepository;
 import jakarta.servlet.http.Cookie;
@@ -58,4 +60,6 @@ public class SessionController {
 
         return new LogoutResponseDTO();
     }
+
+
 }
