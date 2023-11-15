@@ -3,12 +3,16 @@ package com.brights.zwitscher.user;
 import com.brights.zwitscher.user.registrierung.RegistrierungRequestDTO;
 import com.brights.zwitscher.user.registrierung.RegistrierungResponseDTO;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -29,19 +33,24 @@ public class UserController {
     }
 
     @PostMapping("/registrieren")
-    public RegistrierungResponseDTO registrieren (@RequestBody RegistrierungRequestDTO registrieren, HttpServletResponse response) {
-        Optional<User> userOptional = userRepository.findByUsername(registrieren.getUsername());
+    public RegistrierungResponseDTO registrieren(@RequestBody @Valid RegistrierungRequestDTO registrieren, BindingResult bindingResult) {
 
-        if (userOptional.isEmpty()) {
-            if(registrieren.getPassword().equals(registrieren.getPassword2())) {
-
-                User user= new User(registrieren.getUsername(), registrieren.getPassword());
-                userRepository.save(user);
-
-                return new RegistrierungResponseDTO(registrieren.getUsername());
-            }
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Passwort stimmt nicht überein");
+        if (bindingResult.hasErrors()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Benutzername oder Passwort ist falsch");
         }
-        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Benutzername schon vergeben");
+
+        if (!registrieren.arePasswordsMatching()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Passwörter stimmen nicht überein");
+        }
+
+        if (userRepository.findByUsername(registrieren.getUsername()).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Benutzername bereits vergeben");
+        }
+
+        User newUser = new User(registrieren.getUsername(), registrieren.getPassword());
+
+        userRepository.save(newUser);
+
+        return new RegistrierungResponseDTO(registrieren.getUsername());
     }
 }
