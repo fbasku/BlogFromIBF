@@ -1,9 +1,12 @@
 package com.brights.zwitscher.user;
 
+import com.brights.zwitscher.artikel.BlogArtikel;
+import com.brights.zwitscher.komentar.Kommentar;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -20,6 +23,12 @@ public class User {
     private String password;
 
     private boolean isAdmin = false;
+
+    @OneToMany(mappedBy = "user")
+    private List<BlogArtikel> artikel = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Kommentar> kommentar = new ArrayList<>();
 
     public User() {
     }
