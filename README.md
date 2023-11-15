@@ -1,8 +1,9 @@
 # Zwitscher - The WebApp
-
-//TODO 
-
+//DONE 👍👍<br>
 As an anonymous user, I can register a new user with username and password so that my identity is established.<br>
+
+
+//TODO<br>
 As a user, I can read the blog posts (title, content, image) in chronological order (the newest first)<br>
 As a user, I can read the comments on a post in chronological order (the oldest first) to gain insight into the opinions of the users.<br>
 As a user, I can write comments on individual posts to share my opinion on the topic of the post with others<br>
