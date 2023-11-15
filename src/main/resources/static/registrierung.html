@@ -13,61 +13,44 @@
     <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
     <script src="templates/javascript-helpers.js"></script>
-    <link rel="stylesheet" href="registrierung.css">
-</head>
-<body>
 
-<div hx-ext="client-side-templates, response-targets, json-enc"
-     hx-trigger="load"
-     hx-get="http://localhost:8080/user"
-     nunjucks-template="main-template"
-     hx-target-4*="#main"
-     hx-target="#main"
-     id="main">
+    <link rel="stylesheet" href="registrierung.css">
+
+</head>
+<body hx-ext="client-side-templates, response-targets, json-enc">
+
+<div class="form-container">
+    <div class="registrierung-box">
+        <form hx-post="http://localhost:8080/registrieren"
+              nunjucks-template="registrieren-status"
+              hx-target-4*="#error-box-login">
+            <h2>Registrierung</h2>
+            <label for="username">Benutzername</label>
+            <input type="text" id="username" name="username" value="">
+            <label for="password">Passwort</label>
+            <input type="password" id="password" name="password" value="">
+            <label for="password2">Passwort</label>
+            <input type="password" id="password2" name="password2" value="">
+            <button type="submit">Submit</button>
+            <div id="error-box-login"></div>
+            <p>Doch Mitglied? <a href="index.html">Hier einloggen</a></p>
+        </form>
+    </div>
 </div>
 
-<template id="main-template">
-    {% include "templates/check-session-valid.html" %}
-
-    <div class="form-container">
-        <div class="registrierung-box">
-            <form>
-                <h2>Registrierung</h2>
-                <label for="username">Benutzername</label>
-                <input type="text" id="username" name="username" value="">
-                <label for="password">Passwort</label>
-                <input type="password" id="password" name="password" value="">
-                <label for="password2">Passwort</label>
-                <input type="password" id="password2" name="password" value="">
-                <button type="submit">Submit</button>
-                <div id="error-box-login"></div>
-            </form>
-        </div>
-    </div>
-</template>
-
-<!-- These templates must not be nested in above template because it already would be interpolated as part of the GET user response -->
-<template id="login-template">
-    {% if error %}
-    <h3>⚠️ Error ⚠️</h3>
-    <code>{{ message }}</code>
-    {% else %}
-    <!-- If no error, register view disappears. User can proceed with login -->
-    {% endif %}
-</template>
-
-<template id="login-successful">
+<template id="registrieren-status">
     {% if error %}
     <div>
         <h3>⚠️ Error ⚠️</h3>
         <code>{{ message }}</code>
     </div>
     {% else %}
-    <p><strong>{{ username }}</strong>, successfully logged in ✅</p>
+    <p><strong>{{ username }}</strong>, du hast dich erfolgreich registriert! ✅</p>
 
-    {# Redirect to home after 500ms #}
-    {{redirect("home.html",500)}}
+    {# Redirect to home after 5000ms #}
+    {{redirect("index.html",5000)}}
     {% endif %}
 </template>
+
 </body>
 </html>
