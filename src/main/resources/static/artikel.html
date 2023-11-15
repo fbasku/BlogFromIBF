@@ -24,15 +24,15 @@
      nunjucks-template="Blog-template"
      hx-trigger="load"></div>
 <section id="Eintrag">
-Hier sind die Blogeinträge
+    Hier sind die Blogeinträge
 </section>
 
 <template id="Blog-template">
     <p>I need help pls help me</p>
     {% for eintrag in Baho %}
-        <p>{{ Titel }}</p>
-        <p>{{ eintrag.inhalt }}</p>
-        <div><img src="{{ eintrag.bildUrl }}" width="500rem" alt="{{eintrag.titel}}"></div>
+    <p>{{ Titel }}</p>
+    <p>{{ eintrag.inhalt }}</p>
+    <div><img src="{{ eintrag.bildUrl }}" width="500rem" alt="{{eintrag.titel}}"></div>
     {% endfor %}
 </template>
 
