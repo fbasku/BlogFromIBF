@@ -29,8 +29,8 @@
 
 <template id="Blog-template">
     <p>I need help pls help me</p>
-    {% for eintrag in Baho %}
-    <p>{{ Titel }}</p>
+    {% for eintrag in dtoListe %}
+    <p>{{ eintrag.titel }}</p>
     <p>{{ eintrag.inhalt }}</p>
     <div><img src="{{ eintrag.bildUrl }}" width="500rem" alt="{{eintrag.titel}}"></div>
     {% endfor %}
