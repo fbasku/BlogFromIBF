@@ -5,10 +5,12 @@ import jakarta.validation.constraints.Size;
 
 public class RegistrierungRequestDTO {
 
+    @NotBlank(message = "Benutzername erforderlich.")
+    @Size(min = 4, max = 15, message = "Benutzername muss zwischen 4 und 15 Zeichen lang sein")
     private String username;
-
+    @NotBlank (message = "Passwort nicht gesetzt.")
+    @Size(min = 4, max = 15, message = "Passwort muss zwischen 4 und 15 Zeichen lang sein")
     private String password;
-
     private String password2;
 
     public RegistrierungRequestDTO(String username, String password, String password2) {
@@ -39,5 +41,9 @@ public class RegistrierungRequestDTO {
 
     public void setPassword2(String password2) {
         this.password2 = password2;
+    }
+
+    public boolean arePasswordsMatching() {
+        return this.password != null && this.password.equals(this.password2);
     }
 }

@@ -15,7 +15,7 @@ import java.time.Instant;
 import java.util.Optional;
 
 @RestController
-public class SessionController {
+public class    SessionController {
 
     private SessionRepository sessionRepository;
     private UserRepository userRepository;

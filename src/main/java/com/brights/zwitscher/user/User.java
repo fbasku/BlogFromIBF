@@ -13,15 +13,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-
     @Column(unique = true)
-    @NotBlank(message = "Benutzername erforderlich.")
-    @Size(min = 4, max = 15, message = "Benutzername muss zwischen 4 und 15 Zeichen lang sein")
     private String username;
 
     @JsonIgnore
-    @NotBlank (message = "Passwort nicht gesetzt.")
-    @Size(min = 4, max = 15, message = "Passwort muss zwischen 4 und 15 Zeichen lang sein")
     private String password;
 
     private boolean isAdmin = false;
