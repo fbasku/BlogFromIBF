@@ -7,14 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>HTMX</title>
-
     <script src="https://unpkg.com/htmx.org@1.9.3"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/client-side-templates.js"></script>
     <script src="https://unpkg.com/nunjucks@latest"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
     <script src="templates/javascript-helpers.js"></script>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="registrierung.css">
 </head>
 <body>
 
@@ -31,20 +30,18 @@
     {% include "templates/check-session-valid.html" %}
 
     <div class="form-container">
-        <div class="login-box">
-                <form hx-post="http://localhost:8080/login"
-                      nunjucks-template="login-successful"
-                      hx-target=".form-container"
-                      hx-target-4*="#error-box-login">
-                    <h2>Login</h2>
-                    <label for="username">username</label>
-                    <input type="text" id="username" name="username" value="user1">
-                    <label for="password">password</label>
-                    <input type="password" id="password" name="password" value="12345">
-                    <button type="submit">Submit</button>
-                    <div id="error-box-login"></div>
-                </form>
-            </div>
+        <div class="registrierung-box">
+            <form>
+                <h2>Registrierung</h2>
+                <label for="username">Benutzername</label>
+                <input type="text" id="username" name="username" value="">
+                <label for="password">Passwort</label>
+                <input type="password" id="password" name="password" value="">
+                <label for="password2">Passwort</label>
+                <input type="password" id="password2" name="password" value="">
+                <button type="submit">Submit</button>
+                <div id="error-box-login"></div>
+            </form>
         </div>
     </div>
 </template>
