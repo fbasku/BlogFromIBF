@@ -1,9 +1,8 @@
-package com.brights.zwitscher.artikel;
+package com.brights.zwitscher.kommentar;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BlogArtikelRepository extends CrudRepository<BlogArtikel, Long> {
-
+public interface KommentarRepository extends CrudRepository<Kommentar, Long> {
 }

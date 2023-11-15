@@ -35,6 +35,9 @@ public class DataLoader implements ApplicationRunner {
 
         BlogArtikel blogArtikel1 = new BlogArtikel("skjhsdk","djskhgkjshksjhd",user1,"https://imgv3.fotor.com/images/homepage-feature-card/Car-PNG.jpg");
         blogArtikelRepository.save(blogArtikel1);
+        BlogArtikel blogArtikel2 = new BlogArtikel("Wir lieben es","Unser Inhalt",user1,"https://imgv3.fotor.com/images/homepage-feature-card/Car-PNG.jpg");
+        blogArtikelRepository.save(blogArtikel2);
+
     }
 
 }
