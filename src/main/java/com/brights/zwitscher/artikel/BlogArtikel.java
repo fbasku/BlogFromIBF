@@ -1,11 +1,10 @@
 package com.brights.zwitscher.artikel;
 
-import com.brights.zwitscher.komentar.Kommentar;
+import com.brights.zwitscher.kommentar.Kommentar;
 import com.brights.zwitscher.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.time.Instant;
 import java.util.List;
 
 @Entity
@@ -15,26 +14,68 @@ public class BlogArtikel {
     private Long id;
     private String titel;
     private String inhalt;
-
-    public BlogArtikel(String titel, String inhalt, User user, String bildUrl) {
-        this.titel = titel;
-        this.inhalt = inhalt;
-        this.user = user;
-        this.bildUrl = bildUrl;
-    }
+    @ManyToOne
+    @JsonIgnore
+    private User verfasser;
+    private String  bildUrl;
+    @OneToMany(mappedBy = "blogArtikel")
+    private List<Kommentar> kommentarList;
 
     public BlogArtikel() {
     }
 
-    @ManyToOne
-    @JsonIgnore
-    private User user;
+    public BlogArtikel(String titel, String inhalt, User user, String bildUrl) {
+        this.titel = titel;
+        this.inhalt = inhalt;
+        this.verfasser = user;
+        this.bildUrl = bildUrl;
+    }
 
-    private String  bildUrl;
-    private Instant datum;
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-@OneToMany(mappedBy = "blogArtikel")
-   private List<Kommentar> kommentarList;
+    public String getTitel() {
+        return titel;
+    }
 
+    public void setTitel(String titel) {
+        this.titel = titel;
+    }
+
+    public String getInhalt() {
+        return inhalt;
+    }
+
+    public void setInhalt(String inhalt) {
+        this.inhalt = inhalt;
+    }
+
+    public User getVerfasser() {
+        return verfasser;
+    }
+
+    public void setVerfasser(User verfasser) {
+        this.verfasser = verfasser;
+    }
+
+    public String getBildUrl() {
+        return bildUrl;
+    }
+
+    public void setBildUrl(String bildUrl) {
+        this.bildUrl = bildUrl;
+    }
+
+    public List<Kommentar> getKommentarList() {
+        return kommentarList;
+    }
+
+    public void setKommentarList(List<Kommentar> kommentarList) {
+        this.kommentarList = kommentarList;
+    }
 }
