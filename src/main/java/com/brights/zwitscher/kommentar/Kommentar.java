@@ -69,5 +69,4 @@ public class Kommentar {
     public void setBlogArtikel(BlogArtikel blogArtikel) {
         this.blogArtikel = blogArtikel;
     }
-
 }
