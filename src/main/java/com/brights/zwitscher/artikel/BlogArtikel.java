@@ -5,6 +5,7 @@ import com.brights.zwitscher.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.time.Instant;
 import java.util.List;
 
 @Entity
@@ -14,10 +15,10 @@ public class BlogArtikel {
     private Long id;
     private String titel;
     private String inhalt;
-    @ManyToOne
-    @JsonIgnore
-    private User verfasser;
+    private Instant datum;
     private String  bildUrl;
+    @ManyToOne
+    private User verfasser;
     @OneToMany(mappedBy = "blogArtikel")
     private List<Kommentar> kommentarList;
 
@@ -29,6 +30,7 @@ public class BlogArtikel {
         this.inhalt = inhalt;
         this.verfasser = user;
         this.bildUrl = bildUrl;
+        this.datum = Instant.now();
     }
 
     public Long getId() {
@@ -69,6 +71,14 @@ public class BlogArtikel {
 
     public void setBildUrl(String bildUrl) {
         this.bildUrl = bildUrl;
+    }
+
+    public Instant getDatum() {
+        return datum;
+    }
+
+    public void setDatum(Instant datum) {
+        this.datum = datum;
     }
 
     public List<Kommentar> getKommentarList() {
