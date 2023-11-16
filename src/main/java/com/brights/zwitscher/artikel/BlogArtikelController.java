@@ -1,23 +1,31 @@
 package com.brights.zwitscher.artikel;
 
 import com.brights.zwitscher.kommentar.Kommentar;
+import com.brights.zwitscher.kommentar.KommentarRepository;
+import com.brights.zwitscher.kommentar.KommentarRequestDTO;
+import com.brights.zwitscher.user.User;
+import com.brights.zwitscher.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping()
 public class BlogArtikelController {
 
     private final BlogArtikelRepository blogRepository;
+    private final KommentarRepository kommentarRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public BlogArtikelController(BlogArtikelRepository blogRepository){
+    public BlogArtikelController(BlogArtikelRepository blogRepository, KommentarRepository kommentarRepository, UserRepository userRepository) {
         this.blogRepository = blogRepository;
+        this.kommentarRepository = kommentarRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/artikel")
@@ -32,7 +40,24 @@ public class BlogArtikelController {
         return dtoListe;
     }
 
+    @PostMapping("/artikel")
+    public Kommentar fügeKommentar(@RequestBody KommentarRequestDTO DTO) {
+        BlogArtikel blogArtikel = blogRepository.findById(DTO.getBlogArtikelId()).orElseThrow(()
+                -> new NoSuchElementException("Blogartikel nicht gefunden"));
+        User verfasser = userRepository.findById(DTO.getUserId()).orElseThrow(()
+                -> new NoSuchElementException("Benutzer nicht gefunden"));
 
+        Kommentar blogKommentar = new Kommentar();
+
+        blogKommentar.setBlogArtikel(blogArtikel);
+        blogKommentar.setVerfasser(verfasser);
+        blogKommentar.setInhalt(DTO.getInhalt());
+        blogKommentar.setDatum(Instant.now());
+
+        kommentarRepository.save(blogKommentar);
+
+        return blogKommentar;
+    }
 
     // Hilfsmethode zur Konvertierung von BlogArtikel zu BlogArtikelDTO
     private BlogArtikelDTO convertToDTO(BlogArtikel blogArtikel) {
@@ -45,4 +70,6 @@ public class BlogArtikelController {
                 blogArtikel.getKommentarList()
         );
     }
+
+
 }
