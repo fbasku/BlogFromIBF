@@ -44,23 +44,23 @@ public class BlogArtikelController {
     }
 
     @PostMapping("/kommentar")
-    public ResponseEntity<?> erstelleKommentar(@RequestBody KommentarRequestDTO kommentarDTO,
-                                               @ModelAttribute("sessionUser") Optional<User> sessionUser) {
+    public ResponseEntity<List<BlogArtikelDTO>> erstelleKommentar(@RequestBody KommentarRequestDTO kommentarDTO,
+                                                                  @ModelAttribute("sessionUser") Optional<User> sessionUser) {
         if (!sessionUser.isPresent()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Nicht angemeldet.");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
         User user = sessionUser.get();
         BlogArtikel blogArtikel = blogRepository.findById(kommentarDTO.getBlogArtikelId()).orElse(null);
 
         if (blogArtikel == null) {
-            return ResponseEntity.badRequest().body("Blogartikel nicht gefunden");
+            return ResponseEntity.badRequest().build();
         }
 
         Kommentar kommentar = new Kommentar(user, kommentarDTO.getInhalt(), blogArtikel);
         kommentarRepository.save(kommentar);
 
-        return ResponseEntity.ok().body("Kommentar erfolgreich hinzugefügt");
+        return ResponseEntity.ok(bekommeAlleArtikel());
     }
 
 
