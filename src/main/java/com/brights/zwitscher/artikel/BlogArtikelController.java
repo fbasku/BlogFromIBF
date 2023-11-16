@@ -1,7 +1,6 @@
 package com.brights.zwitscher.artikel;
 
 import com.brights.zwitscher.kommentar.Kommentar;
-import com.brights.zwitscher.kommentar.KommentarDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,24 +36,13 @@ public class BlogArtikelController {
 
     // Hilfsmethode zur Konvertierung von BlogArtikel zu BlogArtikelDTO
     private BlogArtikelDTO convertToDTO(BlogArtikel blogArtikel) {
-        List<KommentarDTO> kommentarDTOs = new ArrayList<>();
-        if (blogArtikel.getKommentarList() != null) {
-            for (Kommentar kommentar : blogArtikel.getKommentarList()) {
-                kommentarDTOs.add(new KommentarDTO(
-                        kommentar.getId(),
-                        kommentar.getDatum(),
-                        kommentar.getVerfasser().getUsername(),
-                        kommentar.getInhalt()
-                ));
-            }
-        }
 
         return new BlogArtikelDTO(
                 blogArtikel.getId(),
                 blogArtikel.getTitel(),
                 blogArtikel.getInhalt(),
                 blogArtikel.getBildUrl(),
-                kommentarDTOs
+                blogArtikel.getKommentarList()
         );
     }
 }

@@ -29,11 +29,15 @@
 
 <template id="Blog-template">
     <p>I need help pls help me</p>
-    {% for eintrag in dtoListe %}
+    {% for eintrag in list() %}
     <p>{{ eintrag.titel }}</p>
     <p>{{ eintrag.inhalt }}</p>
     <div><img src="{{ eintrag.bildUrl }}" width="500rem" alt="{{eintrag.titel}}"></div>
-    {% endfor %}
+        {% for kommentar in eintrag.kommentare  %}
+        <p> test{{ kommentar.verfasser.username }}</p>
+        <p> {{ kommentar.inhalt }}</p>
+        {% endfor %}
+        {% endfor %}
 </template>
 
 </body>

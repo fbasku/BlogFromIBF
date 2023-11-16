@@ -13,10 +13,9 @@ public class Kommentar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Instant datum;
-    @ManyToOne
-    @JsonIgnore
-    private User verfasser;
     private String inhalt;
+    @ManyToOne
+    private User verfasser;
     @ManyToOne
     @JsonIgnore
     private BlogArtikel blogArtikel;
@@ -28,6 +27,7 @@ public class Kommentar {
         this.verfasser = user;
         this.inhalt = inhalt;
         this.blogArtikel = blogArtikel;
+        this.datum = Instant.now();
     }
 
     public Long getId() {
@@ -69,4 +69,5 @@ public class Kommentar {
     public void setBlogArtikel(BlogArtikel blogArtikel) {
         this.blogArtikel = blogArtikel;
     }
+
 }

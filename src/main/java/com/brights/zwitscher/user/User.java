@@ -20,8 +20,10 @@ public class User {
     private String password;
     private boolean isAdmin = false;
     @OneToMany(mappedBy = "verfasser")
+    @JsonIgnore
     private List<BlogArtikel> artikel = new ArrayList<>();
     @OneToMany(mappedBy = "verfasser")
+    @JsonIgnore
     private List<Kommentar> kommentare = new ArrayList<>();
 
     public User() {
