@@ -14,11 +14,11 @@
     <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
     <script src="templates/javascript-helpers.js"></script>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="blog.css">
 </head>
 <body hx-ext="client-side-templates, response-targets, json-enc">
 
-<h1>Blog-Einträge</h1>
+<h1>Wilkommen zum Blog</h1>
 <div hx-get="http://localhost:8080/artikel"
      hx-target="#Eintrag"
      nunjucks-template="Blog-template"
@@ -28,16 +28,21 @@
 </section>
 
 <template id="Blog-template">
-    <p>I need help pls help me</p>
     {% for eintrag in list() %}
     <p>{{ eintrag.titel }}</p>
     <p>{{ eintrag.inhalt }}</p>
     <div><img src="{{ eintrag.bildUrl }}" width="500rem" alt="{{eintrag.titel}}"></div>
-        {% for kommentar in eintrag.kommentare  %}
-        <p> test{{ kommentar.verfasser.username }}</p>
-        <p> {{ kommentar.inhalt }}</p>
-        {% endfor %}
-        {% endfor %}
+    {% for kommentar in eintrag.kommentare  %}
+    <p>{{kommentar.datum}}</p>
+    <p> test{{ kommentar.verfasser.username }}</p>
+    <p> {{ kommentar.inhalt }}</p>
+    {% endfor %}
+    <label for="inhalt">Komentar:</label><br>
+    <textarea id="inhalt" name="inhalt"></textarea><br>
+    <input type="submit"  value="Kommentar hinzufügen">
+    <hr>
+    <br>
+    {% endfor %}
 </template>
 
 </body>

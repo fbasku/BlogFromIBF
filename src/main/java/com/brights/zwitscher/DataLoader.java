@@ -37,13 +37,20 @@ public class DataLoader implements ApplicationRunner {
         user2.setAdmin(true);
         userRepository.save(user2);
 
-        BlogArtikel blogArtikel1 = new BlogArtikel("Porsche","Es geht hier um Autos",user1,"https://imgv3.fotor.com/images/homepage-feature-card/Car-PNG.jpg");
+        BlogArtikel blogArtikel1 = new BlogArtikel("Sparen für den Ruhestand: Ein Leitfaden","Der Ruhestand mag noch weit entfernt sein, aber es ist nie zu früh,\n" +
+                "um mit dem Sparen zu beginnen. In diesem Blog werden wir verschiedene\n" +
+                "Sparstrategien für den Ruhestand vorstellen und Tipps geben, wie man am\n" +
+                "besten für die goldenen Jahre vorsorgen kann.",user1,"https://png.pngtree.com/png-clipart/20230118/original/pngtree-financial-funnel-depositing-money-png-image_8920264.png");
+        BlogArtikel blogArtikel2 = new BlogArtikel("Die Zukunft der Kryptowährungen",
+                "Kryptowährungen untersuchen und wie sie die Finanzlandschaft verändern könnten.\n" +
+                "Wir werden auch die Risiken und Chancen diskutieren, die mit dem Investieren\n" +
+                "in Kryptowährungen verbunden sind.",user2,"https://miro.medium.com/v2/resize:fit:1400/1*zwgbjQRY9vGhM3ENBeSKGA.png");
         blogArtikelRepository.save(blogArtikel1);
-        BlogArtikel blogArtikel2 = new BlogArtikel("Volkswagen","Volkswagen ist die größte Marke",user2,"https://imgv3.fotor.com/images/homepage-feature-card/Car-PNG.jpg");
         blogArtikelRepository.save(blogArtikel2);
-
         Kommentar kommentar = new Kommentar(user1,"dies ist ein Test", blogArtikel1);
+        Kommentar kommentar1 = new Kommentar(user2,"es ist sehr interesant",blogArtikel2);
         kommentarRepository.save(kommentar);
+        kommentarRepository.save(kommentar1);
 
     }
 
