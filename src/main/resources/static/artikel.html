@@ -5,9 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     <title>HTMX</title>
-
     <script src="https://unpkg.com/htmx.org@1.9.3"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/client-side-templates.js"></script>
     <script src="https://unpkg.com/nunjucks@latest"></script>
@@ -24,24 +22,32 @@
      nunjucks-template="Blog-template"
      hx-trigger="load"></div>
 <section id="Eintrag">
-    Hier sind die Blogeinträge
+    <!-- Hier werden die Blogeinträge geladen -->
 </section>
 
 <template id="Blog-template">
     {% for eintrag in list() %}
-    <p>{{ eintrag.titel }}</p>
-    <p>{{ eintrag.inhalt }}</p>
-    <div><img src="{{ eintrag.bildUrl }}" width="500rem" alt="{{eintrag.titel}}"></div>
-    {% for kommentar in eintrag.kommentare  %}
-    <p>{{kommentar.datum}}</p>
-    <p> test{{ kommentar.verfasser.username }}</p>
-    <p> {{ kommentar.inhalt }}</p>
-    {% endfor %}
-    <label for="inhalt">Komentar:</label><br>
-    <textarea id="inhalt" name="inhalt"></textarea><br>
-    <input type="submit"  value="Kommentar hinzufügen">
-    <hr>
-    <br>
+    <article>
+        <h2>{{ eintrag.titel }}</h2>
+        <p>{{ eintrag.inhalt }}</p>
+        <div><img src="{{ eintrag.bildUrl }}" width="500rem" alt="{{eintrag.titel}}"></div>
+
+        <section class="kommentare">
+            {% for kommentar in eintrag.kommentare  %}
+            <div class="kommentar">
+                <p>{{ kommentar.verfasser.username }}: {{ kommentar.inhalt }}</p>
+                <span>{{ kommentar.datum }}</span>
+            </div>
+            {% endfor %}
+        </section>
+
+        <form hx-post="http://localhost:8080/kommentar" hx-target="#Eintrag">
+            <input type="hidden" name="blogArtikelId" value="{{ eintrag.id }}">
+            <textarea name="inhalt" placeholder="Ihr Kommentar" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+        <hr>
+    </article>
     {% endfor %}
 </template>
 

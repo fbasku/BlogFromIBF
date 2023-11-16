@@ -6,12 +6,15 @@ import com.brights.zwitscher.kommentar.KommentarRequestDTO;
 import com.brights.zwitscher.user.User;
 import com.brights.zwitscher.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping()
@@ -40,24 +43,26 @@ public class BlogArtikelController {
         return dtoListe;
     }
 
-    @PostMapping("/artikel")
-    public Kommentar fügeKommentar(@RequestBody KommentarRequestDTO DTO) {
-        BlogArtikel blogArtikel = blogRepository.findById(DTO.getBlogArtikelId()).orElseThrow(()
-                -> new NoSuchElementException("Blogartikel nicht gefunden"));
-        User verfasser = userRepository.findById(DTO.getUserId()).orElseThrow(()
-                -> new NoSuchElementException("Benutzer nicht gefunden"));
+    @PostMapping("/kommentar")
+    public ResponseEntity<?> erstelleKommentar(@RequestBody KommentarRequestDTO kommentarDTO,
+                                               @ModelAttribute("sessionUser") Optional<User> sessionUser) {
+        if (!sessionUser.isPresent()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Nicht angemeldet.");
+        }
 
-        Kommentar blogKommentar = new Kommentar();
+        User user = sessionUser.get();
+        BlogArtikel blogArtikel = blogRepository.findById(kommentarDTO.getBlogArtikelId()).orElse(null);
 
-        blogKommentar.setBlogArtikel(blogArtikel);
-        blogKommentar.setVerfasser(verfasser);
-        blogKommentar.setInhalt(DTO.getInhalt());
-        blogKommentar.setDatum(Instant.now());
+        if (blogArtikel == null) {
+            return ResponseEntity.badRequest().body("Blogartikel nicht gefunden");
+        }
 
-        kommentarRepository.save(blogKommentar);
+        Kommentar kommentar = new Kommentar(user, kommentarDTO.getInhalt(), blogArtikel);
+        kommentarRepository.save(kommentar);
 
-        return blogKommentar;
+        return ResponseEntity.ok().body("Kommentar erfolgreich hinzugefügt");
     }
+
 
     // Hilfsmethode zur Konvertierung von BlogArtikel zu BlogArtikelDTO
     private BlogArtikelDTO convertToDTO(BlogArtikel blogArtikel) {
