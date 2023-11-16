@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>HTMX</title>
+
+    <script src="https://unpkg.com/htmx.org@1.9.3"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/client-side-templates.js"></script>
+    <script src="https://unpkg.com/nunjucks@latest"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
+    <script src="templates/javascript-helpers.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body hx-ext="client-side-templates, response-targets, json-enc">
+
+<h1>Blog-Einträge</h1>
+<div hx-get="http://localhost:8080/artikel"
+     hx-target="#Eintrag"
+     nunjucks-template="Blog-template"
+     hx-trigger="load"></div>
+<section id="Eintrag">
+    Hier sind die Blogeinträge
+</section>
+
+<template id="Blog-template">
+    <p>I need help pls help me</p>
+    {% for eintrag in dtoListe %}
+    <p>{{ eintrag.titel }}</p>
+    <p>{{ eintrag.inhalt }}</p>
+    <div><img src="{{ eintrag.bildUrl }}" width="500rem" alt="{{eintrag.titel}}"></div>
+    {% endfor %}
+</template>
+
+</body>
+</html>

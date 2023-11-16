@@ -27,3 +27,6 @@ Content-Type:application/json
 
 ### Get current rank for user
 GET http://localhost:8080/rank
+
+###
+GET http://localhost:8080/artikel

@@ -1,7 +1,7 @@
 package com.brights.zwitscher.user;
 
 import com.brights.zwitscher.artikel.BlogArtikel;
-import com.brights.zwitscher.komentar.Kommentar;
+import com.brights.zwitscher.kommentar.Kommentar;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -11,24 +11,18 @@ import java.util.List;
 @Entity
 @Table
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     @Column(unique = true)
     private String username;
-
     @JsonIgnore
     private String password;
-
     private boolean isAdmin = false;
-
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "verfasser")
     private List<BlogArtikel> artikel = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user")
-    private List<Kommentar> kommentar = new ArrayList<>();
+    @OneToMany(mappedBy = "verfasser")
+    private List<Kommentar> kommentare = new ArrayList<>();
 
     public User() {
     }
@@ -68,5 +62,21 @@ public class User {
 
     public void setAdmin(boolean admin) {
         isAdmin = admin;
+    }
+
+    public List<BlogArtikel> getArtikel() {
+        return artikel;
+    }
+
+    public void setArtikel(List<BlogArtikel> artikel) {
+        this.artikel = artikel;
+    }
+
+    public List<Kommentar> getKommentare() {
+        return kommentare;
+    }
+
+    public void setKommentare(List<Kommentar> kommentare) {
+        this.kommentare = kommentare;
     }
 }
