@@ -30,3 +30,13 @@ GET http://localhost:8080/rank
 
 ###
 GET http://localhost:8080/artikel
+Content-Type:application/json
+
+###
+POST http://localhost:8080/kommentar
+Content-Type:application/json
+
+{
+"blogArtikelId": "1",
+"inhalt": "schoener Artikel"
+}
