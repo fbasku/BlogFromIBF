@@ -29,13 +29,42 @@ public class DataLoader implements ApplicationRunner {
 
     public void run(ApplicationArguments args) {
         // Create user
-        User user1= new User("user1","12345");
+        User user1 = new User("user1", "12345");
         userRepository.save(user1);
+
+        User gamerX = new User("gamerX", "g@m3rP@ss");
+        userRepository.save(gamerX);
+
+        User codeNinja = new User("codeNinja", "c0d3N1nj@");
+        userRepository.save(codeNinja);
+
+        User stealthMaster = new User("stealthMaster", "sne@kyPass");
+        userRepository.save(stealthMaster);
+
+        User dataGuru = new User("dataGuru", "D@t@Guru123");
+        userRepository.save(dataGuru);
+
+        User cyberHero = new User("cyberHero", "Cyb3rH3r0P@ss");
+        userRepository.save(cyberHero);
+
+        User quantumCoder = new User("quantumCoder", "Qu@ntumC0d3");
+        userRepository.save(quantumCoder);
+
+        User techSavvy = new User("techSavvy", "T3chS@vvy123");
+        userRepository.save(techSavvy);
+
+        User infoSecPro = new User("infoSecPro", "Inf0S3cUr1ty");
+        userRepository.save(infoSecPro);
+
+        User machineMind = new User("machineMind", "M@ch1n3M1nd");
+        userRepository.save(machineMind);
 
         // Create admin
         User user2= new User("admin","12345");
         user2.setAdmin(true);
         userRepository.save(user2);
+
+
 
         BlogArtikel blogArtikel1 = new BlogArtikel("Sparen für den Ruhestand: Ein Leitfaden","Der Ruhestand mag noch weit entfernt sein, aber es ist nie zu früh,\n" +
                 "um mit dem Sparen zu beginnen. In diesem Blog werden wir verschiedene\n" +

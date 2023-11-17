@@ -36,7 +36,7 @@
     <div hx-get="http://localhost:8080/users"
          hx-target="#output1"
          nunjucks-template="MitgliederListe"
-         hx-trigger="load">
+         hx-trigger="every 400ms">
     </div>
 
     <section>
@@ -51,6 +51,10 @@
             </tbody>
 
         </table>
+
+        <br>
+        <br>
+
     </section>
 </template>
 
@@ -64,6 +68,14 @@
             {% else %}
             Benutzer
             {% endif %}
+        </td>
+
+        <td>
+            <button hx-post="http://localhost:8080/users/{{ user.username }}"
+                  hx-target="#main-template"
+                  nunjucks-template="MitgliederListe"
+                  >Ändere
+            </button>
         </td>
     </tr>
     {% endfor %}

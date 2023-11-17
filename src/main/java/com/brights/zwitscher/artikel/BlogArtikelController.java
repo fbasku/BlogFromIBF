@@ -12,10 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -101,10 +99,10 @@ public class BlogArtikelController {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Database error occurred");
     }
 
-    @PostMapping("/users/{id}")
-    public ResponseEntity<List<UserDTO>> aendereUserStatus(@PathVariable("id") long userId) {
+    @PostMapping("/users/{username}")
+    public ResponseEntity<List<UserDTO>> aendereUserStatus(@PathVariable("username") String username) {
         try {
-            User user = userRepository.findById(userId).orElse(null);
+            User user = userRepository.findByUsername(username).orElse(null);
 
             if (user == null) {
                 return ResponseEntity.notFound().build();
