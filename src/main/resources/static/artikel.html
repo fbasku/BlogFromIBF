@@ -30,6 +30,7 @@
 
 <template id="Blog-template">
     {% for eintrag in list() %}
+    <a href="artikel-bearbeitung.html"><button class="button-link">Artikel Bearbeiten</button></a>
     <article>
         <h2>{{ eintrag.titel }}</h2>
         <p>{{ eintrag.inhalt }}</p>
@@ -37,6 +38,9 @@
 
         <section class="kommentare">
             {% for kommentar in eintrag.kommentare  %}
+            <hr>
+            <button class="button-link">Kommentar Bearbeiten</button>
+            <br>
             <div class="kommentar">
                 <p>{{ kommentar.verfasser.username }}: {{ kommentar.inhalt }}</p>
                 <span>{{ kommentar.datum }}</span>
