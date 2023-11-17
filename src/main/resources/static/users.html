@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mitglieder</title>
+    <title>Benutzerverwaltung</title>
 
     <script src="https://unpkg.com/htmx.org@1.9.3"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/client-side-templates.js"></script>
@@ -18,8 +18,22 @@
 </head>
 
 <body hx-ext="client-side-templates,response-targets,json-enc">
-<div
-        hx-trigger="load"
+
+<header>
+    <nav>
+        <ul class="menu-left">
+            <li><a href="/">Home</a></li>
+            <li><a href="/artikel">Artikel</a></li>
+            <li><a href="/meine-artikel">Meine Artikel</a></li>
+            <li><a href="/artikel-erstellen">Artikel erstellen</a></li>
+        </ul>
+        <ul class="menu-right">
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div    hx-trigger="load"
         hx-get="http://localhost:8080/user"
         nunjucks-template="main-template"
         hx-target-4*="#main"
@@ -29,9 +43,6 @@
 
 <template id="main-template">
     {% include "templates/check-session-invalid.html" %}
-    {% include "templates/navbar.html" %}
-
-    <h1>Mitglieder-Liste</h1>
 
     <div hx-get="http://localhost:8080/users"
          hx-target="#output1"
@@ -39,43 +50,48 @@
          hx-trigger="every 400ms">
     </div>
 
-    <section>
+    <section class="user-list">
+        <h1>Unsere Community</h1>
         <table>
             <tr>
-                <th>Nummer</th>
-                <th>Name</th>
-                <th>Status</th>
+                <th>#</th>
+                <th>Nutzername</th>
+                <th>Rolle</th>
+                <th>Aktion</th>
             </tr>
-
             <tbody id="output1">
             </tbody>
-
         </table>
-
-        <br>
-        <br>
-
     </section>
 </template>
+
 
 <template id="MitgliederListe">
     {% for user in list() %}
     <tr>
         <td> {{ loop.index }}</td>
-        <td> {{ user.username }}</td>
+        <td class="username"> {{ user.username }}</td>
         <td> {% if user.admin %}
-            Admin
+            Administrator
             {% else %}
             Benutzer
             {% endif %}
         </td>
-
-        <td>
+        <td> {% if not user.admin %}
             <button hx-post="http://localhost:8080/users/{{ user.username }}"
                     hx-target="#main-template"
                     nunjucks-template="MitgliederListe"
-            >Ändere
+                    class="status-button">
+                    Zum Admin befördern
             </button>
+            {% else %}
+            <button hx-post="http://localhost:8080/users/{{ user.username }}"
+                    hx-target="#main-template"
+                    nunjucks-template="MitgliederListe"
+                    class="status-buttonAdmin">
+                Adminrechte entziehen
+            </button>
+            {% endif %}
         </td>
     </tr>
     {% endfor %}

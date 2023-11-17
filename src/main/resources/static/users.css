@@ -1,47 +1,120 @@
+/* Allgemeine Stile */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
 }
 
-.navbar {
-    background-color: #333;
+header {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
     overflow: hidden;
-    margin-bottom: 15px;
 }
 
-.navbar a {
+.menu-left, .menu-right {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline;
+}
+
+.menu-left {
     float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
+}
+
+.menu-right {
+    float: right;
+}
+
+header nav ul li {
+    display: inline;
+    margin-left: 15px;
+}
+
+header nav a {
     text-decoration: none;
+    color: #1da1f2;
+    font-weight: bold;
+    font-size: 1em;
+    padding: 5px 12px;
+    border-radius: 0px; /* Standardmäßig keine abgerundeten Ecken */
+    transition: background-color 0.3s, color 0.3s, border-radius 0.3s, padding 0.3s; /* Übergänge für mehrere Eigenschaften */
 }
 
-.navbar a:hover {
-    background-color: #ddd;
-    color: black;
+header nav a:hover {
+    background-color: rgba(221, 221, 221, 0.8);
+    border-radius: 20px; /* Abgerundete Ecken beim Hover */
+    padding: 5px 12px; /* Konsistentes Padding */
 }
 
-h1 {
-    color: #333;
+/* Spezifische Stile für Benutzerverwaltung */
+.user-list {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 1100px;
+    margin: 20px auto;
+}
+
+.user-list h1 {
     text-align: center;
+    color: #333;
+    font-size: 2em;
 }
 
-table {
+.user-list table {
     width: 100%;
     border-collapse: collapse;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
+.user-list th, .user-list td {
     padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
-th {
-    background-color: #4CAF50;
+/* Spezifische Stile für die Aktionsspalte */
+.user-list th:nth-child(4), .user-list td:nth-child(4) {
+    max-width: 90px; /* Maximale Breite für die Aktionsspalte */
+    white-space: nowrap; /* Verhindert, dass der Text umbricht */
+}
+
+
+.user-list th {
+    background-color: #f4f4f4;
+}
+
+.user-list .username {
+    font-weight: bold;
+}
+
+.user-list .status-button, .user-list .status-buttonAdmin {
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.user-list .status-button {
+    background-color: #1da1f2;
     color: white;
 }
 
+.user-list .status-buttonAdmin {
+    background-color: #f28b1d;
+    color: white;
+}
+
+.user-list .status-button:hover, .user-list .status-buttonAdmin:hover {
+    opacity: 0.9;
+}

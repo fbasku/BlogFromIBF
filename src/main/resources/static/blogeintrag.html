@@ -35,15 +35,15 @@
 </header>
 
 <div id="create-post">
-    <h2>Neuen Post erstellen</h2>
+    <h2>Erstelle einen Post</h2>
     <form id="post-form">
         <div>
             <label for="post-title">Titel:</label>
-            <input type="text" id="post-title" name="title" required placeholder="Der Anfang ist alles">
+            <input type="text" id="post-title" name="title" required placeholder="Der Anfang ist alles...">
         </div>
         <div>
             <label for="post-content">Inhalt:</label>
-            <textarea id="post-content" name="content" required placeholder="Erzählen Sie Ihre Geschichte, teilen Sie Ihr Wissen, oder inspirieren Sie andere..."></textarea>
+            <textarea id="post-content" name="content" required placeholder="Erzählen Sie Ihre Geschichte, teilen Sie Ihr Wissen oder inspirieren Sie andere..."></textarea>
         </div>
         <div>
             <label for="post-image-url">Bild-URL (optional):</label>
@@ -57,32 +57,7 @@
 </div>
 
 <script>
-    document.getElementById('post-form').addEventListener('submit', function(e) {
-        // Entfernen der is-invalid Klasse von allen Feldern bei jedem Submit-Versuch
-        document.querySelectorAll('.is-invalid').forEach(function(field) {
-            field.classList.remove('is-invalid');
-        });
 
-        // Überprüfen, ob das Formular gültige Daten enthält
-        if (!this.checkValidity()) {
-            e.preventDefault();
-
-            // Hinzufügen der is-invalid Klasse zu den ungültigen Feldern
-            document.querySelectorAll(':invalid').forEach(function(field) {
-                if (field.tagName === 'INPUT' || field.tagName === 'TEXTAREA') {
-                    field.classList.add('is-invalid');
-                }
-            });
-        }
-    });
-
-    function cancelPost() {
-        document.getElementById('post-form').reset();
-        // Entfernen der is-invalid Klasse von allen Feldern beim Abbrechen
-        document.querySelectorAll('.is-invalid').forEach(function(field) {
-            field.classList.remove('is-invalid');
-        });
-    }
 </script>
 
 </body>
