@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Neuer Post</title>
+
+    <!-- Externe Skripte -->
+    <script src="https://unpkg.com/htmx.org@1.9.3"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/client-side-templates.js"></script>
+    <script src="https://unpkg.com/nunjucks@latest"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
+    <script src="templates/javascript-helpers.js"></script>
+
+    <!-- Stylesheet-Verlinkung -->
+    <link rel="stylesheet" href="blogeintrag.css">
+</head>
+<body hx-ext="client-side-templates,response-targets,json-enc">
+
+<header>
+    <nav>
+        <ul class="menu-left">
+            <li><a href="/">Home</a></li>
+            <li><a href="/artikel">Artikel</a></li>
+            <li><a href="/meine-artikel">Meine Artikel</a></li>
+            <li><a href="/artikel-erstellen">Artikel erstellen</a></li>
+        </ul>
+        <ul class="menu-right">
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div id="create-post">
+    <h2>Neuen Post erstellen</h2>
+    <form id="post-form">
+        <div>
+            <label for="post-title">Titel:</label>
+            <input type="text" id="post-title" name="title" required placeholder="Der Anfang ist alles">
+        </div>
+        <div>
+            <label for="post-content">Inhalt:</label>
+            <textarea id="post-content" name="content" required placeholder="Erzählen Sie Ihre Geschichte, teilen Sie Ihr Wissen, oder inspirieren Sie andere..."></textarea>
+        </div>
+        <div>
+            <label for="post-image-url">Bild-URL (optional):</label>
+            <input type="url" id="post-image-url" name="imageUrl">
+        </div>
+        <div>
+            <button type="submit">Post erstellen</button>
+            <button type="button" onclick="cancelPost()">Abbrechen</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.getElementById('post-form').addEventListener('submit', function(e) {
+        // Entfernen der is-invalid Klasse von allen Feldern bei jedem Submit-Versuch
+        document.querySelectorAll('.is-invalid').forEach(function(field) {
+            field.classList.remove('is-invalid');
+        });
+
+        // Überprüfen, ob das Formular gültige Daten enthält
+        if (!this.checkValidity()) {
+            e.preventDefault();
+
+            // Hinzufügen der is-invalid Klasse zu den ungültigen Feldern
+            document.querySelectorAll(':invalid').forEach(function(field) {
+                if (field.tagName === 'INPUT' || field.tagName === 'TEXTAREA') {
+                    field.classList.add('is-invalid');
+                }
+            });
+        }
+    });
+
+    function cancelPost() {
+        document.getElementById('post-form').reset();
+        // Entfernen der is-invalid Klasse von allen Feldern beim Abbrechen
+        document.querySelectorAll('.is-invalid').forEach(function(field) {
+            field.classList.remove('is-invalid');
+        });
+    }
+</script>
+
+</body>
+</html>
