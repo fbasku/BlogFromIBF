@@ -1,60 +1,78 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
-}
-
-.form-container {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    width: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
-.login-box {
-    background-color: #f0f0f0;
-    padding:0 50px 50px 50px;
-    border: 4px solid black;
-    border-radius: 25px;
-    box-shadow: 20px 20px 2px 1px rgba(0, 0, 255, .2);
+.container {
+    text-align: left;
 }
 
-h2 {
-    color: #333;
+.image-buttons-container {
+
+    display: flex;
+    align-items: center;
 }
 
-form {
+.image {
+    max-width: 50%;
+    height: auto;
+    margin-right: 20px;
+}
+
+.title-container {
     display: flex;
     flex-direction: column;
-    max-width: 300px;
-    margin: 0 auto;
+    justify-content: flex-start;
+    text-align: left;
 }
 
-label {
-    margin-bottom: 5px;
+.title {
+    font-size: 96px;
+    margin-bottom: 135px;
+    margin-top: 0;
 }
 
-input {
-    padding: 8px;
-    margin-bottom: 15px;
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Buttons nach links ausrichten */
 }
 
-button {
-    background-color: #4caf50;
-    color: white;
-    padding: 10px;
-    border: none;
+.buttons button {
+    margin-bottom: 10px;
+    font-size: 30px;
     cursor: pointer;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 20px;
+    transition: background-color 0.3s, color 0.3s;
+    width: 300px;
 }
 
-button:hover {
-    background-color: #45a049;
+#register {
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-hr {
-    border: 1px solid #ddd;
-    margin: 20px 0;
+#register:hover {
+    background-color: #0056b3;
 }
+
+#login {
+    background-color: transparent;
+    color: #007bff;
+    border: 1px solid #007bff;
+}
+
+#login:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+
+
