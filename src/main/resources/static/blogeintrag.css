@@ -1,0 +1,123 @@
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: #333;
+}
+
+header {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+nav {
+    max-width: 1200px; /* Maximale Breite für die Navigation */
+    margin: 0 auto; /* Zentrieren der Navigation */
+    overflow: hidden;
+    padding: 10px 20px;
+}
+
+.menu-left, .menu-right {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline;
+}
+
+.menu-left {
+    float: left;
+}
+
+.menu-right {
+    float: right;
+}
+
+header nav ul li {
+    display: inline;
+    margin-left: 15px; /*Abstands zwischen den Menüpunkten */
+}
+
+header nav a {
+    text-decoration: none;
+    color: #1da1f2;
+    font-weight: bold;
+    font-size: 1em;
+    padding: 5px 12px;
+    border-radius: 0px; /* Standardmäßig keine abgerundeten Ecken */
+    transition: background-color 0.3s, color 0.3s, border-radius 0.3s, padding 0.3s; /* Übergänge für mehrere Eigenschaften */
+}
+
+header nav a:hover {
+    background-color: rgba(221, 221, 221, 0.8);
+    border-radius: 20px; /* Abgerundete Ecken beim Hover */
+    padding: 5px 12px; /* Konsistentes Padding */
+}
+
+#main, #create-post {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="url"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1.1em; /* Erhöhte Schriftgröße */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+
+textarea {
+    height: 200px;
+}
+
+.is-invalid {
+    border: 2px solid red;
+}
+
+input[type="text"]:focus,
+input[type="url"]:focus,
+textarea:focus {
+    border-color: #aaa;
+}
+
+button {
+    display: inline-block;
+    background: #1da1f2; /* Blau ähnlich wie bei x.com */
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+
+button[type="button"] {
+    background: #666;
+}
+
+button[type="button"]:hover {
+    background: #555;
+}
