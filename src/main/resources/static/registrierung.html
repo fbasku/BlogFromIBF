@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,26 +15,31 @@
     <script src="templates/javascript-helpers.js"></script>
 
     <link rel="stylesheet" href="registrierung.css">
-
 </head>
 <body hx-ext="client-side-templates, response-targets, json-enc">
 
-<div class="form-container">
-    <div class="registrierung-box">
-        <form hx-post="http://localhost:8080/registrieren"
-              nunjucks-template="registrieren-status"
-              hx-target-4*="#error-box-login">
-            <h2>Registrierung</h2>
-            <label for="username">Benutzername</label>
-            <input type="text" id="username" name="username" value="">
-            <label for="password">Passwort</label>
-            <input type="password" id="password" name="password" value="">
-            <label for="password2">Passwort</label>
-            <input type="password" id="password2" name="password2" value="">
-            <button type="submit">Submit</button>
-            <div id="error-box-login"></div>
-            <p>Doch Mitglied? <a href="index.html">Hier einloggen</a></p>
-        </form>
+<div class="container">
+    <div class="image-buttons-container">
+        <img src="./images/logo_trans.png" alt="Hauptseite Bild" class="image">
+        <div class="title-container">
+            <h1 class="title">Das beschäftigt die Finanzwelt</h1>
+            <div class="form-container">
+                <form hx-post="http://localhost:8080/registrieren"
+                      nunjucks-template="registrieren-status"
+                      hx-target-4*="#error-box-login">
+                    <label for="username">Benutzername</label>
+                    <input type="text" id="username" name="username" value="">
+                    <label for="password">Passwort</label>
+                    <input type="password" id="password" name="password" value="">
+                    <label for="password2">Passwort</label>
+                    <input type="password" id="password2" name="password2" value="">
+                    <br>
+                    <button type="submit" style="width: 315px">Submit</button>
+                    <p>Doch Mitglied? Klicke hier zum <a href="login.html">Login</a></p>
+                    <div id="error-box-login"></div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -48,7 +53,7 @@
     <p><strong>{{ username }}</strong>, du hast dich erfolgreich registriert! ✅</p>
 
     {# Redirect to home after 5000ms #}
-    {{redirect("index.html",5000)}}
+    {{redirect("login.html",3000)}}
     {% endif %}
 </template>
 

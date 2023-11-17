@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>HTMX</title>
+
+    <script src="https://unpkg.com/htmx.org@1.9.3"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/client-side-templates.js"></script>
+    <script src="https://unpkg.com/nunjucks@latest"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
+    <script src="templates/javascript-helpers.js"></script>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<div hx-ext="client-side-templates, response-targets, json-enc"
+     hx-trigger="load"
+     hx-get="http://localhost:8080/user"
+     nunjucks-template="main-template"
+     hx-target-4*="#main"
+     hx-target="#main"
+     id="main">
+</div>
+
+<template id="main-template">
+    {% include "templates/navbar.html" %}
+
+    <div class="form-container">
+        <div class="login-box">
+            <form hx-post="http://localhost:8080/login"
+                  nunjucks-template="login-successful"
+                  hx-target=".form-container"
+                  hx-target-4*="#error-box-login">
+                <h2>Login</h2>
+                <label for="username">username</label>
+                <input type="text" id="username" name="username">
+                <label for="password">password</label>
+                <input type="password" id="password" name="password">
+                <button type="submit">Submit</button>
+                <div id="error-box-login"></div>
+            </form>
+            <p>Noch kein Mitglied? <a href="registrierung.html">Hier registrieren</a></p>
+        </div>
+    </div>
+</template>
+
+
+<template id="login-successful">
+    {% if error %}
+    <div>
+        <h3>⚠️ Error ⚠️</h3>
+        <code>{{ message }}</code>
+    </div>
+    {% else %}
+    <p><strong>{{ username }}</strong>, du hast dich erfolgreich angemeldet ✅</p>
+
+    {# Redirect to home after 500ms #}
+    {{redirect("home.html",500)}}
+    {% endif %}
+</template>
+</body>
+</html>
