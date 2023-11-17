@@ -4,82 +4,80 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: white;
 }
 
 .container {
-    text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1500px;
+    width: 100%;
+    margin: 20px;
+    padding: 20px;
 }
 
 .image-buttons-container {
     display: flex;
+    justify-content: space-between; /* Sorgt für Abstand zwischen Bild und Buttons */
     align-items: center;
+    width: 100%;
 }
 
 .image {
     max-width: 50%;
     height: auto;
-    margin-right: 20px;
 }
 
 .title-container {
+    width: 50%;
+    padding: 0 20px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    text-align: left;
+    align-items: flex-start; /* Links ausrichten */
 }
 
 .title {
-    font-size: 96px;
-    margin-bottom: 135px;
-    margin-top: 0;
+    font-size: 5em;
+    margin-bottom: 20px;
+    text-align: left; /* Titeltext linksbündig */
 }
 
 .buttons {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Buttons nach links ausrichten */
+    align-items: flex-start; /* Buttons linksbündig */
 }
 
 .buttons button {
     margin-bottom: 10px;
-    font-size: 30px;
+    font-size: 1.5em;
     cursor: pointer;
     padding: 15px 30px;
     border: none;
     border-radius: 20px;
     transition: background-color 0.3s, color 0.3s;
-    width: 300px;
-}
-
-#register,
-#login {
-    width: 100%; /* Ändere die Breite der Eingabefelder */
-    max-width: 300px; /* Setze eine maximale Breite für die Eingabefelder */
-    padding: 15px 30px;
-    font-size: 30px;
-    margin-bottom: 10px;
-    border: none;
-    border-radius: 20px;
-    transition: background-color 0.3s, color 0.3s;
+    width: 100%;
+    max-width: 300px;
 }
 
 #register {
-    background-color: #007bff;
+    background-color: #1da1f2;
     color: white;
 }
 
 #register:hover {
-    background-color: #0056b3;
+    background-color: #0d8dd8;
 }
 
 #login {
     background-color: transparent;
-    color: #007bff;
-    border: 1px solid #007bff;
+    color: #1da1f2;
+    border: 1px solid #1da1f2;
 }
 
 #login:hover {
-    background-color: #0056b3;
+    background-color: #1da1f2;
     color: white;
 }
