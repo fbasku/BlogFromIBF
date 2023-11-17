@@ -18,6 +18,9 @@
 </head>
 
 <body hx-ext="client-side-templates,response-targets,json-enc">
+<div class="navbar">
+    <a href="home.html">Startseite</a>
+</div>
 <div
         hx-trigger="load"
         hx-get="http://localhost:8080/user"
@@ -29,7 +32,6 @@
 
 <template id="main-template">
     {% include "templates/check-session-invalid.html" %}
-    {% include "templates/navbar.html" %}
 
     <h1>Mitglieder-Liste</h1>
 

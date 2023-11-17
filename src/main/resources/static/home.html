@@ -16,7 +16,26 @@
 
     <link rel="stylesheet" href="home.css">
 </head>
+<header>
+    <nav>
+        <!-- <a href="home.html">Home</a> ||-->
+        <!-- Manually trigger logout via button -->
+        <button hx-post="http://localhost:8080/logout"
+                nunjucks-template="logout-triggered"
+                hx-target="#logout" id="logout">Logout 🚪</button>
+        <a href="users.html"><button>Mitglieder Bearbeiten 🤵🏻</button></a>
 
+    </nav>
+    <template id="logout-triggered">
+        Logout 🏃 <strong>Redirecting ...</strong>
+        <span>Good by {{username}}</span>
+        {{redirect("index.html",500)}}
+    </template>
+    <div class="image-container">
+        <img src="https://img.freepik.com/fotos-premium/hand-haelt-einen-blauen-hintergrund-des-sparschweins-aus-einem-zerrissenen-loch-in-einem-papierhintergrund_86639-2073.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699488000&semt=ais" alt="Logo">
+        <div class="image-text">SpassSparen</div>
+    </div>
+</header>
 <body>
 <div hx-ext="client-side-templates,response-targets,json-enc"
       hx-trigger="load"
@@ -26,34 +45,31 @@
       hx-target="#main"
       id="main">
 </div>
-
+<div class="container">
 <template id="main-template">
     {% include "templates/check-session-invalid.html" %}
-    {% include "templates/navbar.html" %}
 
-    <h1>Willkommen zum SpassSparen</h1>
+    <p class="container-p">Willkommen, <strong>{{ username }}</strong></p>
 
-    <p>Willkommen, <strong>{{ username }}</strong></p>
-
-    <hr>
-    <!-- This is just an example to get you started (see also RankController in backend). -->
-    <h3>🤨 Möchten Sie wissen, wie viele Benutzer sich vor Ihnen registriert haben?</h3>
-    <button
+    <h3 class="container-h3">🤨 Möchten Sie wissen, wie viele Benutzer sich vor Ihnen registriert haben?</h3>
+    <button class="container-button"
             hx-get="http://localhost:8080/rank"
             nunjucks-template="rank-result-template"
-            hx-target="#rank-result">👉 Click here</button>
+            hx-target="#rank-result">👉 Klicken here</button>
     <div id="rank-result"></div>
 
-    <hr>
-
-    <!-- TODO Needs to be implemented. Best is to copy 'home.html' and modify it to your needs. -->
-
-    <h3> Schauen Sie sich die neuesten Blogbeiträge an </h3>
-    <a href="artikel.html"><button>Click here 🌟</button></a>
+    <h3 class="container-h3"> Schauen Sie sich die neuesten Blogbeiträge an </h3>
+    <a href="artikel.html"><button class="container-button">Click here 🌟</button></a>
 </template>
+</div>
 
 <template id="rank-result-template">
-    Hey, {{load('user').username}}, you are the <strong>{{rank}}th</strong> user on this site.
+    Hallo {{load('user').username}}, Sie sind <strong>{{rank}}th</strong> benutzer auf diese site.
 </template>
+<br>
+<br>
+<a href="registrierung.html"><button>Passwort ändern 🔑</button></a>
+<button hx-get="http://localhost:8080/delete-account"
+        hx-target="#status">Konto löschen ❌</button>
 </body>
 </html>
