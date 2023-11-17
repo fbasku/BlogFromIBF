@@ -14,40 +14,60 @@
     <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
     <script src="templates/javascript-helpers.js"></script>
 
+    <link rel="stylesheet" href="users.css">
 </head>
 
 <body hx-ext="client-side-templates,response-targets,json-enc">
-<div hx-trigger="load"
-     hx-get="http://localhost:8080/user"
-     nunjucks-template="main-template"
-     hx-target="#main"
-     id="main">
-</div>
-<h1>Mitglieder-Liste</h1>
-
-<div hx-get="http://localhost:8080/users"
-     hx-target="#output1"
-     nunjucks-template="Mitglieder-Liste"
-     hx-trigger="load">
+<div
+        hx-trigger="load"
+        hx-get="http://localhost:8080/user"
+        nunjucks-template="main-template"
+        hx-target-4*="#main"
+        hx-target="#main"
+        id="main">
 </div>
 
-<section id="output1">
-    Hier ist die Mitglieder-Liste
-</section>
+<template id="main-template">
+    {% include "templates/check-session-invalid.html" %}
+    {% include "templates/navbar.html" %}
 
-<template id="Mitglieder-Liste">
-    <ul>
-        {% for user in list() %}
-        <li>
-            <strong>Nummer:</strong> {{ loop.index }},
-            <strong>Benutzername:</strong> {{ user.username }},
-            <strong>Status:</strong>
-            {% if user.admin %}
+    <h1>Mitglieder-Liste</h1>
+
+    <div hx-get="http://localhost:8080/users"
+         hx-target="#output1"
+         nunjucks-template="MitgliederListe"
+         hx-trigger="load">
+    </div>
+
+    <section>
+        <table>
+            <tr>
+                <th>Nummer</th>
+                <th>Name</th>
+                <th>Status</th>
+            </tr>
+
+            <tbody id="output1">
+            </tbody>
+
+        </table>
+    </section>
+</template>
+
+<template id="MitgliederListe">
+    {% for user in list() %}
+    <tr>
+        <td> {{ loop.index }}</td>
+        <td> {{ user.username }}</td>
+        <td> {% if user.admin %}
             Admin
             {% else %}
             Benutzer
             {% endif %}
-        </li>
-        {% endfor %}
-    </ul>
+        </td>
+    </tr>
+    {% endfor %}
 </template>
+
+</body>
+</html>

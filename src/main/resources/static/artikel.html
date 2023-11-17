@@ -5,25 +5,41 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTMX</title>
+    <title>Mitglieder</title>
+
     <script src="https://unpkg.com/htmx.org@1.9.3"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/client-side-templates.js"></script>
     <script src="https://unpkg.com/nunjucks@latest"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
     <script src="templates/javascript-helpers.js"></script>
+
     <link rel="stylesheet" href="blog.css">
 </head>
-<body hx-ext="client-side-templates, response-targets, json-enc">
 
-<h1>Willkommen zum Blog</h1>
-<div hx-get="http://localhost:8080/artikel"
-     hx-target="#Eintrag"
-     nunjucks-template="Blog-template"
-     hx-trigger="load"></div>
-<section id="Eintrag">
-    <!-- Hier werden die Blogeinträge geladen -->
-</section>
+<body hx-ext="client-side-templates,response-targets,json-enc">
+<div
+        hx-trigger="load"
+        hx-get="http://localhost:8080/user"
+        nunjucks-template="main-template"
+        hx-target-4*="#main"
+        hx-target="#main"
+        id="main">
+</div>
+
+<template id="main-template">
+    {% include "templates/check-session-invalid.html" %}
+    {% include "templates/navbar.html" %}
+
+    <h1>Willkommen zum Blog</h1>
+    <div hx-get="http://localhost:8080/artikel"
+         hx-target="#Eintrag"
+         nunjucks-template="Blog-template"
+         hx-trigger="load"></div>
+    <section id="Eintrag">
+        <!-- Hier werden die Blogeinträge geladen -->
+    </section>
+</template>
 
 <template id="Blog-template">
     {% for eintrag in list() %}
@@ -33,7 +49,7 @@
         <div><img src="{{ eintrag.bildUrl }}" width="500rem" alt="{{eintrag.titel}}"></div>
 
         <section class="kommentare">
-            {% for kommentar in eintrag.kommentare  %}
+            {% for kommentar in eintrag.kommentare %}
             <div class="kommentar">
                 <p>{{ kommentar.verfasser.username }}: {{ kommentar.inhalt }}</p>
                 <span>{{ kommentar.datum }}</span>
