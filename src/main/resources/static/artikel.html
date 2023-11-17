@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="blog.css">
 </head>
 <body hx-ext="client-side-templates, response-targets, json-enc">
-
+<div class="navbar">
+    <a href="home.html">Startseite</a>
+</div>
 <h1>Willkommen zum Blog</h1>
 <div hx-get="http://localhost:8080/artikel"
      hx-target="#Eintrag"
