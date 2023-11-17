@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mitglieder</title>
+
+    <script src="https://unpkg.com/htmx.org@1.9.3"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/client-side-templates.js"></script>
+    <script src="https://unpkg.com/nunjucks@latest"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
+    <script src="templates/javascript-helpers.js"></script>
+
+</head>
+
+<body hx-ext="client-side-templates,response-targets,json-enc">
+<div hx-trigger="load"
+     hx-get="http://localhost:8080/user"
+     nunjucks-template="main-template"
+     hx-target="#main"
+     id="main">
+</div>
+<h1>Mitglieder-Liste</h1>
+
+<div hx-get="http://localhost:8080/users"
+     hx-target="#output1"
+     nunjucks-template="Mitglieder-Liste"
+     hx-trigger="load">
+</div>
+
+<section id="output1">
+    Hier ist die Mitglieder-Liste
+</section>
+
+<template id="Mitglieder-Liste">
+    <ul>
+        {% for user in list() %}
+        <li>
+            <strong>Nummer:</strong> {{ loop.index }},
+            <strong>Benutzername:</strong> {{ user.username }},
+            <strong>Status:</strong>
+            {% if user.admin %}
+            Admin
+            {% else %}
+            Benutzer
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</template>

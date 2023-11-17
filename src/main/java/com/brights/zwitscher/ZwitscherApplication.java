@@ -9,7 +9,6 @@ public class ZwitscherApplication {
     public static void main(String[] args) {
         SpringApplication.run(ZwitscherApplication.class, args);
 
-
     }
 
 }
