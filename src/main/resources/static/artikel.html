@@ -13,43 +13,34 @@
     <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
     <script src="templates/javascript-helpers.js"></script>
-
-    <link rel="stylesheet" href="blog.css">
+    <link rel="stylesheet" href="artikel.css">
 </head>
-
-<body hx-ext="client-side-templates,response-targets,json-enc">
-<div
-        hx-trigger="load"
-        hx-get="http://localhost:8080/user"
-        nunjucks-template="main-template"
-        hx-target-4*="#main"
-        hx-target="#main"
-        id="main">
+<body hx-ext="client-side-templates, response-targets, json-enc">
+<div class="navbar">
+    <a href="home.html">Startseite</a>
 </div>
-
-<template id="main-template">
-    {% include "templates/check-session-invalid.html" %}
-    {% include "templates/navbar.html" %}
-
-    <h1>Willkommen zum Blog</h1>
-    <div hx-get="http://localhost:8080/artikel"
-         hx-target="#Eintrag"
-         nunjucks-template="Blog-template"
-         hx-trigger="load"></div>
-    <section id="Eintrag">
-        <!-- Hier werden die Blogeinträge geladen -->
-    </section>
-</template>
+<h1>Willkommen zum Blog</h1>
+<div hx-get="http://localhost:8080/artikel"
+     hx-target="#Eintrag"
+     nunjucks-template="Blog-template"
+     hx-trigger="load"></div>
+<section id="Eintrag">
+    <!-- Hier werden die Blogeinträge geladen -->
+</section>
 
 <template id="Blog-template">
     {% for eintrag in list() %}
+    <a href="artikel-bearbeitung.html"><button class="button-link">Artikel Bearbeiten</button></a>
     <article>
         <h2>{{ eintrag.titel }}</h2>
         <p>{{ eintrag.inhalt }}</p>
         <div><img src="{{ eintrag.bildUrl }}" width="500rem" alt="{{eintrag.titel}}"></div>
 
         <section class="kommentare">
-            {% for kommentar in eintrag.kommentare %}
+            {% for kommentar in eintrag.kommentare  %}
+            <hr>
+            <button class="button-link">Kommentar Bearbeiten</button>
+            <br>
             <div class="kommentar">
                 <p>{{ kommentar.verfasser.username }}: {{ kommentar.inhalt }}</p>
                 <span>{{ kommentar.datum }}</span>
