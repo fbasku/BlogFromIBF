@@ -40,3 +40,12 @@ Content-Type:application/json
 "blogArtikelId": "1",
 "inhalt": "schoener Artikel"
 }
+
+### Get all Users
+GET http://localhost:8080/users
+
+
+### Post
+POST http://localhost:8080/users/1
+Content-Type: application/json
+
