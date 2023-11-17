@@ -4,7 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public class RegistrierungRequestDTO {
-
     @NotBlank(message = "Benutzername erforderlich.")
     @Size(min = 4, max = 15, message = "Benutzername muss zwischen 4 und 15 Zeichen lang sein")
     private String username;

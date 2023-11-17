@@ -1,9 +1,11 @@
 package com.brights.zwitscher.artikel;
+//As an administrator, I can name registered users as administrators so that they can support me in editing and managing the blog.<br>
 
 import com.brights.zwitscher.kommentar.Kommentar;
 import com.brights.zwitscher.kommentar.KommentarRepository;
 import com.brights.zwitscher.kommentar.KommentarRequestDTO;
 import com.brights.zwitscher.user.User;
+import com.brights.zwitscher.user.UserDTO;
 import com.brights.zwitscher.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -63,7 +65,6 @@ public class BlogArtikelController {
         return ResponseEntity.ok(bekommeAlleArtikel());
     }
 
-
     // Hilfsmethode zur Konvertierung von BlogArtikel zu BlogArtikelDTO
     private BlogArtikelDTO convertToDTO(BlogArtikel blogArtikel) {
 
@@ -76,5 +77,45 @@ public class BlogArtikelController {
         );
     }
 
+    @GetMapping("/users")
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        try {
+            List<UserDTO> userDTOs = new ArrayList<>();
+            Iterable<User> allUsers = userRepository.findAll();
 
+            for (User user : allUsers) {
+                UserDTO userDTO = new UserDTO(user.getUsername(), user.isAdmin());
+                userDTOs.add(userDTO);
+            }
+
+            return ResponseEntity.ok(userDTOs);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    // Beispiel für die Behandlung von Datenbankfehlern
+    @ExceptionHandler(org.springframework.dao.DataAccessException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<String> handleDatabaseException(org.springframework.dao.DataAccessException ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Database error occurred");
+    }
+
+    @PostMapping("/users/{id}")
+    public ResponseEntity<List<UserDTO>> aendereUserStatus(@PathVariable("id") long userId) {
+        try {
+            User user = userRepository.findById(userId).orElse(null);
+
+            if (user == null) {
+                return ResponseEntity.notFound().build();
+            }
+
+            user.setAdmin(true);
+            userRepository.save(user);
+
+            return getAllUsers();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 }
