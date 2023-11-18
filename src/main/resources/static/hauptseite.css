@@ -1,131 +1,96 @@
+/* Allgemeine Stile */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
 }
+
+/* Header Stile */
 header {
-    background-color: #f4f4f4;
-    color: white;
-    padding: 10px;
-    text-align: center;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
 }
 
 nav {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    align-content: stretch;
-    flex-direction: row;
-    padding-bottom: 5px;
-}
-
-nav h1 {
-    margin: 0;
-}
-
-nav button {
-    background-color: #354458;
-    color: #ffffff;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-nav button:hover {
-    background-color: #ddd;
-}
-
-#main {
-    width: 80%;
-    margin: auto;
+    max-width: 1200px;
+    margin: 0 auto;
     overflow: hidden;
 }
 
-
-h1 {
-    color: #129888;
-    font-size: 2em;
-    margin-bottom: 20px;
-    text-align: center;
+.menu-left, .menu-right {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline;
 }
 
-p {
-    font-size: 1em;
-    color: #333;
-    line-height: 1.6em;
+.menu-left {
+    float: left;
 }
 
-button {
-    display: inline-block;
-    color: #fff;
-    background-color: #354458;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
+.menu-right {
+    float: right;
+}
+
+header nav ul li {
+    display: inline;
+    margin-left: 15px;
+}
+
+header nav a {
     text-decoration: none;
-    transition: background 0.3s ease;
-}
-
-button:hover {
-    background-color: #303F9F;
-}
-
-hr {
-    border: none;
-    border-top: 1px solid #ccc;
-    margin: 20px 0;
-}
-p {
-    font-family: 'Arial', sans-serif;
-    font-size: 26px;
-    color: #129888;
-    margin-bottom: 20px;
-    text-align: center;
-}
-p strong {
+    color: #1da1f2;
     font-weight: bold;
-    color: #007bff;
+    font-size: 1em;
+    padding: 5px 12px;
+    transition: background-color 0.3s, color 0.3s, border-radius 0.3s, padding 0.3s;
 }
 
-.image-container {
-    position: relative;
-    max-width: 100%;
+header nav a:hover {
+    background-color: rgba(221, 221, 221, 0.8);
+    border-radius: 20px;
+    padding: 5px 12px;
 }
 
-.image-text {
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 24px;
-    z-index: 1;
-    font-size:50px;
+/* Stile für Hauptinhaltsbereich */
+.content {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
 }
-.container {
-    max-width: 800px;
-    margin: 0 auto;
+
+.welcome-section {
+    text-align: center;
+    margin-bottom: 40px;
 }
-.container-p {
-    font-size: 18px;
+
+.welcome-section h1 {
+    font-size: 2.5em;
+    color: #1da1f2;
+}
+
+.welcome-section p {
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+
+.latest-articles {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
-.container-button {
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
+
+.latest-articles h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
 }
-.container-h3 {
-    font-size: 24px;
-    margin-top: 30px;
-}
-#rank-result {
-    margin-top: 20px;
-    font-size: 20px;
-    color: #129888;
-}
+
+/* Weitere spezifische Stile für Artikel-Kacheln, Listen und andere Elemente */
+/* ... */

@@ -2,73 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
+    <title>Hauptseite</title>
+    <link rel="stylesheet" href="hauptseite.css">
 
+    <!-- Externe Skripte -->
     <script src="https://unpkg.com/htmx.org@1.9.3"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/client-side-templates.js"></script>
     <script src="https://unpkg.com/nunjucks@latest"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
     <script src="templates/javascript-helpers.js"></script>
-
-    <link rel="stylesheet" href="hauptseite.css">
 </head>
-<header>
-    <nav>
-        <button hx-post="http://localhost:8080/logout"
-                nunjucks-template="logout-triggered"
-                hx-target="#logout" id="logout">Logout 🚪</button>
-        <a href="mitglieder_liste.html"><button>Mitglieder Bearbeiten 🤵🏻</button></a>
-    </nav>
 
-    <template id="logout-triggered">
-        Logout 🏃 <strong>Redirecting ...</strong>
-        <span>Good by {{username}}</span>
-        {{redirect("index.html",500)}}
-    </template>
+<body hx-ext="client-side-templates,response-targets,json-enc">
 
-    <div class="image-container">
-        <img src="https://img.freepik.com/fotos-premium/hand-haelt-einen-blauen-hintergrund-des-sparschweins-aus-einem-zerrissenen-loch-in-einem-papierhintergrund_86639-2073.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699488000&semt=ais" alt="Logo">
-        <div class="image-text">SpassSparen</div>
-    </div>
-</header>
-<body>
-<div hx-ext="client-side-templates,response-targets,json-enc"
-      hx-trigger="load"
-      hx-get="http://localhost:8080/user"
-      nunjucks-template="main-template"
-      hx-target-4*="#main"
-      hx-target="#main"
-      id="main">
+<div hx-trigger="load"
+     hx-get="http://localhost:8080/user"
+     nunjucks-template="main-template"
+     hx-target-4*="#main"
+     hx-target="#main"
+     id="main">
 </div>
-<div class="container">
+
 <template id="main-template">
     {% include "templates/check-session-invalid.html" %}
+    {% include "templates/navbar.html" %}
+    <!-- Inhalt der Hauptseite hier -->
 
-    <p class="container-p">Willkommen, <strong>{{ username }}</strong></p>
+    <div class="content">
 
-    <h3 class="container-h3">🤨 Möchten Sie wissen, wie viele Benutzer sich vor Ihnen registriert haben?</h3>
-    <button class="container-button"
-            hx-get="http://localhost:8080/rank"
-            nunjucks-template="rank-result-template"
-            hx-target="#rank-result">👉 Klicken here</button>
-    <div id="rank-result"></div>
+        <section class="welcome-section">
+            <h1>Willkommen auf unserer Plattform!</h1>
+            <p>Entdecken Sie die neuesten Artikel, teilen Sie Ihre Gedanken und vernetzen Sie sich mit anderen.</p>
+        </section>
 
-    <h3 class="container-h3"> Schauen Sie sich die neuesten Blogbeiträge an </h3>
-    <a href="alle_blog_artikel.html"><button class="container-button">Click here 🌟</button></a>
+
+        <section class="latest-articles">
+            <h2>Neueste Artikel</h2>
+            <!-- Artikel-Kacheln oder Liste hier einfügen -->
+        </section>
+        <!-- Weitere Sektionen nach Bedarf hinzufügen -->
+
+    </div>
+
 </template>
-</div>
 
-<template id="rank-result-template">
-    Hallo {{load('user').username}}, Sie sind <strong>{{rank}}th</strong> benutzer auf diese site.
-</template>
-<br>
-<br>
-<a href="registrierung.html"><button>Passwort ändern 🔑</button></a>
-<button hx-get="http://localhost:8080/delete-account"
-        hx-target="#status">Konto löschen ❌</button>
 </body>
 </html>
