@@ -3,14 +3,15 @@ package com.brights.zwitscher.artikel;
 import com.brights.zwitscher.kommentar.Kommentar;
 import com.brights.zwitscher.user.User;
 
-import java.time.Instant;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class BlogArtikelDTO {
     private Long id;
     private String titel;
     private String inhalt;
-    private Instant datum;
+    private LocalDate datum;
     private String bildUrl;
     private User verfasser;
     private List<Kommentar> kommentare;
@@ -19,7 +20,7 @@ public class BlogArtikelDTO {
 
     }
 
-    public BlogArtikelDTO(Long id, String titel, String inhalt, Instant datum, String bildUrl, User verfasser, List<Kommentar> kommentare) {
+    public BlogArtikelDTO(Long id, String titel, String inhalt, LocalDate datum, String bildUrl, User verfasser, List<Kommentar> kommentare) {
         this.id = id;
         this.titel = titel;
         this.inhalt = inhalt;
@@ -53,11 +54,12 @@ public class BlogArtikelDTO {
         this.inhalt = inhalt;
     }
 
-    public Instant getDatum() {
-        return datum;
+    public String getDatum() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return datum.format(formatter);
     }
 
-    public void setDatum(Instant datum) {
+    public void setDatum(LocalDate datum) {
         this.datum = datum;
     }
 
@@ -84,4 +86,5 @@ public class BlogArtikelDTO {
     public void setKommentare(List<Kommentar> kommentare) {
         this.kommentare = kommentare;
     }
+
 }

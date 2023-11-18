@@ -6,13 +6,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 public class Kommentar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Instant datum;
+    private LocalDateTime datum;
     private String inhalt;
     @ManyToOne
     private User verfasser;
@@ -27,7 +30,7 @@ public class Kommentar {
         this.verfasser = user;
         this.inhalt = inhalt;
         this.blogArtikel = blogArtikel;
-        this.datum = Instant.now();
+        this.datum = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -38,11 +41,12 @@ public class Kommentar {
         this.id = id;
     }
 
-    public Instant getDatum() {
-        return datum;
+    public String getDatum() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd HH:mm");
+        return datum.format(formatter);
     }
 
-    public void setDatum(Instant datum) {
+    public void setDatum(LocalDateTime datum) {
         this.datum = datum;
     }
 
