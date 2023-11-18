@@ -40,7 +40,12 @@ body {
 
 .title {
     font-size: 5em;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    text-align: left; /* Titeltext linksbündig */
+}
+
+.untertitel {
+    margin-bottom: 10px;
     text-align: left; /* Titeltext linksbündig */
 }
 
