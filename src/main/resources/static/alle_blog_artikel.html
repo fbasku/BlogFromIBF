@@ -13,6 +13,7 @@
     <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
     <script src="templates/javascript-helpers.js"></script>
+
     <link rel="stylesheet" href="alle_blog_artikel.css">
 </head>
 
@@ -57,8 +58,14 @@
         <section class="kommentare">
             {% for kommentar in eintrag.kommentare %}
             <div class="kommentar">
-                <p class="kommentar-autor">{{ kommentar.verfasser.username }} <span class="kommentar-datum">{{ kommentar.datum }} </span></p>
-                <p class="kommentar-inhalt">{{ kommentar.inhalt }}</p>
+
+                <p class="kommentar-autor">{{ kommentar.verfasser.username }}
+                    <span class="kommentar-datum">{{ kommentar.datum }} </span>
+                    <span class="bearbeiten-symbol">&#9998;</span>
+                    <span class="löschen-symbol">&#10007;</span>
+                </p>
+
+                <p class="kommentar-inhalt">{{ kommentar.inhalt }} </p>
 
             </div>
             {% endfor %}
@@ -76,4 +83,5 @@
 </template>
 
 </body>
+
 </html>
