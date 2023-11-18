@@ -70,7 +70,9 @@ public class BlogArtikelController {
                 blogArtikel.getId(),
                 blogArtikel.getTitel(),
                 blogArtikel.getInhalt(),
+                blogArtikel.getDatum(),
                 blogArtikel.getBildUrl(),
+                blogArtikel.getVerfasser(),
                 blogArtikel.getKommentarList()
         );
     }

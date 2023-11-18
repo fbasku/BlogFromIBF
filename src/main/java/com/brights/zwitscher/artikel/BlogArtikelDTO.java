@@ -1,25 +1,31 @@
 package com.brights.zwitscher.artikel;
 
 import com.brights.zwitscher.kommentar.Kommentar;
+import com.brights.zwitscher.user.User;
 
+import java.time.Instant;
 import java.util.List;
 
 public class BlogArtikelDTO {
     private Long id;
     private String titel;
     private String inhalt;
+    private Instant datum;
     private String bildUrl;
+    private User verfasser;
     private List<Kommentar> kommentare;
 
     public BlogArtikelDTO() {
 
     }
 
-    public BlogArtikelDTO(Long id, String titel, String inhalt, String bildUrl, List<Kommentar> kommentare) {
+    public BlogArtikelDTO(Long id, String titel, String inhalt, Instant datum, String bildUrl, User verfasser, List<Kommentar> kommentare) {
         this.id = id;
         this.titel = titel;
         this.inhalt = inhalt;
+        this.datum = datum;
         this.bildUrl = bildUrl;
+        this.verfasser = verfasser;
         this.kommentare = kommentare;
     }
 
@@ -47,12 +53,28 @@ public class BlogArtikelDTO {
         this.inhalt = inhalt;
     }
 
+    public Instant getDatum() {
+        return datum;
+    }
+
+    public void setDatum(Instant datum) {
+        this.datum = datum;
+    }
+
     public String getBildUrl() {
         return bildUrl;
     }
 
     public void setBildUrl(String bildUrl) {
         this.bildUrl = bildUrl;
+    }
+
+    public User getVerfasser() {
+        return verfasser;
+    }
+
+    public void setVerfasser(User verfasser) {
+        this.verfasser = verfasser;
     }
 
     public List<Kommentar> getKommentare() {
