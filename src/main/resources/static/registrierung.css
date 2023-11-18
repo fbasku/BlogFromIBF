@@ -4,17 +4,25 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color: white;
 }
 
 .container {
-    text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1500px;
+    width: 100%;
+    margin: 20px;
+    padding: 20px;
 }
 
 .image-buttons-container {
     display: flex;
+    justify-content: space-between; /* Sorgt für Abstand zwischen Bild und Formular */
     align-items: center;
+    width: 100%;
 }
 
 .image {
@@ -23,34 +31,37 @@ body {
 }
 
 .title-container {
+    width: 50%;
+    padding: 0 20px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    text-align: left;
-    margin-top: 20px;
+    align-items: flex-start; /* Links ausrichten */
 }
 
 .title {
-    font-size: 96px;
-    margin-bottom: 0;
-    margin-top: 0;
+    font-size: 5em;
+    margin-bottom: 20px;
+    text-align: left; /* Titeltext linksbündig */
 }
 
 form {
     display: flex;
     flex-direction: column;
-    margin: 0;
+    align-items: flex-start; /* Formularelemente linksbündig */
     padding: 20px;
+    width: 100%; /* Stellt sicher, dass das Formular die volle Breite nutzt */
 }
 
 label {
     margin-bottom: 5px;
+    text-align: left; /* Labels linksbündig */
+    width: 100%; /* Labels nehmen volle Breite ein */
 }
 
 input, button {
     padding: 15px 30px;
     margin-bottom: 15px;
-    width: 250px;
+    width: 100%; /* Stellt sicher, dass Eingabefelder und Button die volle Breite nutzen */
     border-radius: 20px;
 }
 
@@ -59,12 +70,17 @@ input {
 }
 
 button {
-    background-color: #007bff;
+    background-color: #1da1f2;
     color: white;
     border: none;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #0d8dd8;
+}
+
+#error-box-login {
+    color: red;
+    margin-top: 10px;
 }

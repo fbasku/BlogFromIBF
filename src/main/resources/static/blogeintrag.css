@@ -9,6 +9,7 @@ body {
 
 h2 {
     color: #333;
+    text-align: center; /* Zentriert den Titel */
 }
 
 header {
@@ -17,8 +18,8 @@ header {
 }
 
 nav {
-    max-width: 1200px; /* Maximale Breite für die Navigation */
-    margin: 0 auto; /* Zentrieren der Navigation */
+    max-width: 1200px;
+    margin: 0 auto;
     overflow: hidden;
     padding: 10px 20px;
 }
@@ -40,7 +41,7 @@ nav {
 
 header nav ul li {
     display: inline;
-    margin-left: 15px; /*Abstands zwischen den Menüpunkten */
+    margin-left: 15px;
 }
 
 header nav a {
@@ -49,14 +50,14 @@ header nav a {
     font-weight: bold;
     font-size: 1em;
     padding: 5px 12px;
-    border-radius: 0px; /* Standardmäßig keine abgerundeten Ecken */
-    transition: background-color 0.3s, color 0.3s, border-radius 0.3s, padding 0.3s; /* Übergänge für mehrere Eigenschaften */
+    border-radius: 0px;
+    transition: background-color 0.3s, color 0.3s, border-radius 0.3s, padding 0.3s;
 }
 
 header nav a:hover {
     background-color: rgba(221, 221, 221, 0.8);
-    border-radius: 20px; /* Abgerundete Ecken beim Hover */
-    padding: 5px 12px; /* Konsistentes Padding */
+    border-radius: 20px;
+    padding: 5px 12px;
 }
 
 #main, #create-post {
@@ -83,10 +84,9 @@ textarea {
     border: 1px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
-    font-size: 1.1em; /* Erhöhte Schriftgröße */
+    font-size: 1.1em;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-
 
 textarea {
     height: 200px;
@@ -104,7 +104,7 @@ textarea:focus {
 
 button {
     display: inline-block;
-    background: #1da1f2; /* Blau ähnlich wie bei x.com */
+    background: #1da1f2;
     color: #fff;
     padding: 10px 15px;
     border: none;
@@ -112,7 +112,6 @@ button {
     cursor: pointer;
     transition: background 0.3s;
 }
-
 
 button[type="button"] {
     background: #666;

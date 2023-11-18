@@ -4,6 +4,7 @@ import com.brights.zwitscher.kommentar.Kommentar;
 import com.brights.zwitscher.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 import java.time.Instant;
 import java.util.List;
@@ -14,6 +15,7 @@ public class BlogArtikel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titel;
+    @Size(min = 25, max = 500)
     private String inhalt;
     private Instant datum;
     private String  bildUrl;
