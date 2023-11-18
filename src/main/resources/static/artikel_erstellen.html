@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Neuer Post</title>
+
+    <!-- Externe Skripte -->
+    <script src="https://unpkg.com/htmx.org@1.9.3"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/client-side-templates.js"></script>
+    <script src="https://unpkg.com/nunjucks@latest"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
+    <script src="templates/javascript-helpers.js"></script>
+
+    <!-- Stylesheet-Verlinkung -->
+    <link rel="stylesheet" href="artikel_erstellen.css">
+</head>
+<body hx-ext="client-side-templates,response-targets,json-enc">
+
+
+<header>
+    <nav>
+        <ul class="menu-left">
+            <li><a href="/hauptseite.html">Home</a></li>
+            <li><a href="/alle_blog_artikel.html">Artikel</a></li>
+            <li><a href="/meine-artikel">Meine Artikel</a></li>
+            <li><a href="/artikel_erstellen.html">Artikel erstellen</a></li>
+            <li><a href="/mitglieder_liste.html">Mitglieder</a></li>
+        </ul>
+        <ul class="menu-right">
+            <li id="logout">
+                <a href="#" hx-post="http://localhost:8080/logout"
+                   nunjucks-template="logout-triggered"
+                   hx-target="#logout">Logout</a>
+            </li>
+
+        </ul>
+    </nav>
+</header>
+
+
+<div    hx-trigger="load"
+        hx-get="http://localhost:8080/user"
+        nunjucks-template="überprüfe_session"
+        hx-target-4*="#main"
+        hx-target="#main"
+        id="main">
+</div>
+
+<template id="überprüfe_session">
+    {% include "templates/check-session-invalid.html" %}
+
+    <div id="create-post">
+        <h2>Erstelle einen Post</h2>
+        <form id="post-form">
+            <div>
+                <label for="post-title">Titel:</label>
+                <input type="text" id="post-title" name="title" required placeholder="Der Anfang ist alles...">
+            </div>
+            <div>
+                <label for="post-content">Inhalt:</label>
+                <textarea id="post-content" name="content" required
+                          placeholder="Erzählen Sie Ihre Geschichte, teilen Sie Ihr Wissen oder inspirieren Sie andere..."></textarea>
+            </div>
+            <div>
+                <label for="post-image-url">Bild-URL (optional):</label>
+                <input type="url" id="post-image-url" name="imageUrl">
+            </div>
+            <div>
+                <button type="submit">Post erstellen</button>
+                <button type="button" onclick="cancelPost()">Abbrechen</button>
+            </div>
+        </form>
+    </div>
+
+
+</template>
+
+
+<template id="logout-triggered" class="logout-message">
+    Sie werden <strong>ausgeloggt ...</strong>
+    <span>Auf Wiedersehen, {{username}}</span>
+    {{redirect("index.html",1000)}}
+</template>
+
+
+<script>
+
+</script>
+
+</body>
+</html>

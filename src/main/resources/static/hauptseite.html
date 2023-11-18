@@ -14,23 +14,22 @@
     <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
     <script src="templates/javascript-helpers.js"></script>
 
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="hauptseite.css">
 </head>
 <header>
     <nav>
-        <!-- <a href="home.html">Home</a> ||-->
-        <!-- Manually trigger logout via button -->
         <button hx-post="http://localhost:8080/logout"
                 nunjucks-template="logout-triggered"
                 hx-target="#logout" id="logout">Logout 🚪</button>
-        <a href="users.html"><button>Mitglieder Bearbeiten 🤵🏻</button></a>
-
+        <a href="mitglieder_liste.html"><button>Mitglieder Bearbeiten 🤵🏻</button></a>
     </nav>
+
     <template id="logout-triggered">
         Logout 🏃 <strong>Redirecting ...</strong>
         <span>Good by {{username}}</span>
         {{redirect("index.html",500)}}
     </template>
+
     <div class="image-container">
         <img src="https://img.freepik.com/fotos-premium/hand-haelt-einen-blauen-hintergrund-des-sparschweins-aus-einem-zerrissenen-loch-in-einem-papierhintergrund_86639-2073.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699488000&semt=ais" alt="Logo">
         <div class="image-text">SpassSparen</div>
@@ -59,7 +58,7 @@
     <div id="rank-result"></div>
 
     <h3 class="container-h3"> Schauen Sie sich die neuesten Blogbeiträge an </h3>
-    <a href="artikel.html"><button class="container-button">Click here 🌟</button></a>
+    <a href="alle_blog_artikel.html"><button class="container-button">Click here 🌟</button></a>
 </template>
 </div>
 

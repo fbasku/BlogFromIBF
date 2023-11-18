@@ -14,7 +14,7 @@
     <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
     <script src="templates/javascript-helpers.js"></script>
 
-    <link rel="stylesheet" href="users.css">
+    <link rel="stylesheet" href="mitglieder_liste.css">
 </head>
 
 <body hx-ext="client-side-templates,response-targets,json-enc">
@@ -22,13 +22,19 @@
 <header>
     <nav>
         <ul class="menu-left">
-            <li><a href="/">Home</a></li>
-            <li><a href="/artikel">Artikel</a></li>
+            <li><a href="/hauptseite.html">Home</a></li>
+            <li><a href="/alle_blog_artikel.html">Artikel</a></li>
             <li><a href="/meine-artikel">Meine Artikel</a></li>
-            <li><a href="/artikel-erstellen">Artikel erstellen</a></li>
+            <li><a href="/artikel_erstellen.html">Artikel erstellen</a></li>
+            <li><a href="/mitglieder_liste.html">Mitglieder</a></li>
         </ul>
         <ul class="menu-right">
-            <li><a href="/logout">Logout</a></li>
+            <li id="logout">
+                <a href="#" hx-post="http://localhost:8080/logout"
+                   nunjucks-template="logout-triggered"
+                   hx-target="#logout">Logout</a>
+            </li>
+
         </ul>
     </nav>
 </header>
@@ -40,6 +46,7 @@
         hx-target="#main"
         id="main">
 </div>
+
 
 <template id="main-template">
     {% include "templates/check-session-invalid.html" %}
@@ -95,6 +102,12 @@
         </td>
     </tr>
     {% endfor %}
+</template>
+
+<template id="logout-triggered" class="logout-message">
+    Sie werden <strong>ausgeloggt ...</strong>
+    <span>Auf Wiedersehen, {{username}}</span>
+    {{redirect("index.html",1000)}}
 </template>
 
 </body>
