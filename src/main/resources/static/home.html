@@ -16,60 +16,70 @@
 
     <link rel="stylesheet" href="home.css">
 </head>
-<header>
-    <nav>
-        <!-- <a href="home.html">Home</a> ||-->
-        <!-- Manually trigger logout via button -->
-        <button hx-post="http://localhost:8080/logout"
-                nunjucks-template="logout-triggered"
-                hx-target="#logout" id="logout">Logout 🚪</button>
-        <a href="users.html"><button>Mitglieder Bearbeiten 🤵🏻</button></a>
+<body>
 
-    </nav>
+<nav>
+    <img src="./images/logo_trans.png" alt="Hauptseite Bild" id="logo">
+    <div class="nav-button">
+        <button id="to-blogs" onclick="window.location.href='artikel.html'">Artikel</button>
+        <button id="to-my-blog" onclick="window.location.href='artikel.html'">Mein Artikel</button>
+        <button id="to-users" onclick="window.location.href='users.html'">Mitglieder Bearbeiten</button>
+    </div>
+    <button hx-post="http://localhost:8080/logout"
+            nunjucks-template="logout-triggered"
+            hx-target="#logout" id="logout">Logout
+    </button>
+</nav>
+<div class="main-container">
     <template id="logout-triggered">
         Logout 🏃 <strong>Redirecting ...</strong>
         <span>Good by {{username}}</span>
         {{redirect("index.html",500)}}
     </template>
-    <div class="image-container">
-        <img src="https://img.freepik.com/fotos-premium/hand-haelt-einen-blauen-hintergrund-des-sparschweins-aus-einem-zerrissenen-loch-in-einem-papierhintergrund_86639-2073.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699488000&semt=ais" alt="Logo">
-        <div class="image-text">SpassSparen</div>
+
+    <div hx-ext="client-side-templates,response-targets,json-enc"
+         hx-trigger="load"
+         hx-get="http://localhost:8080/user"
+         nunjucks-template="main-template"
+         hx-target-4*="#main"
+         hx-target="#main"
+         id="main">
     </div>
-</header>
-<body>
-<div hx-ext="client-side-templates,response-targets,json-enc"
-      hx-trigger="load"
-      hx-get="http://localhost:8080/user"
-      nunjucks-template="main-template"
-      hx-target-4*="#main"
-      hx-target="#main"
-      id="main">
+    <div class="container">
+        <template id="main-template">
+            {% include "templates/check-session-invalid.html" %}
+            <h3 class="container-p">Willkommen <strong class="username">{{ username }}</strong></h3>
+            <br>
+            <h3 class="container-h3">Möchten Sie wissen, wie viele Benutzer sich vor Ihnen registriert haben?</h3>
+            <button class="container-button"
+                    hx-get="http://localhost:8080/rank"
+                    nunjucks-template="rank-result-template"
+                    hx-target="#rank-result">Entdecken
+            </button>
+            <div id="rank-result"></div>
+        </template>
+    </div>
+    <img src="./images/undraw_discount_d-4-bd%201.png" id="main-image">
+    <template id="rank-result-template">
+        Hallo <strong>{{load('user').username}}</strong>, Sie sind <strong>{{rank}}</strong> benutzer auf diese site.
+    </template>
 </div>
-<div class="container">
-<template id="main-template">
-    {% include "templates/check-session-invalid.html" %}
-
-    <p class="container-p">Willkommen, <strong>{{ username }}</strong></p>
-
-    <h3 class="container-h3">🤨 Möchten Sie wissen, wie viele Benutzer sich vor Ihnen registriert haben?</h3>
-    <button class="container-button"
-            hx-get="http://localhost:8080/rank"
-            nunjucks-template="rank-result-template"
-            hx-target="#rank-result">👉 Klicken here</button>
-    <div id="rank-result"></div>
-
-    <h3 class="container-h3"> Schauen Sie sich die neuesten Blogbeiträge an </h3>
-    <a href="artikel.html"><button class="container-button">Click here 🌟</button></a>
-</template>
+<div class="uber-uns">
+    <h2>Uber Uns     <img src="./images/logo_trans.png" alt="Hauptseite Bild" id="logo1">
+    </h2>
+    <p class="text">SpassSparen ist mehr als nur ein Unternehmen - wir sind eine Gemeinschaft von Menschen,
+        die sich leidenschaftlich für das Sparen engagieren und dabei Spaß haben. Unser Ziel ist es, unseren
+        Kunden dabei zu helfen, ihre finanziellen Ziele zu erreichen, ohne dabei auf die Freuden des Lebens
+        verzichten zu müssen. Wir glauben, dass Sparen nicht langweilig oder anstrengend sein sollte.
+        Deshalb haben wir innovative und unterhaltsame Sparmethoden entwickelt, die unseren Kunden helfen,
+        Geld zu sparen, während sie ihr Leben in vollen Zügen genießen. Unsere Experten sind stets bemüht,
+        die besten Sparstrategien zu finden und diese auf unterhaltsame und ansprechende Weise zu präsentieren.
+        Wir sind stolz darauf, unseren Kunden nicht nur Werkzeuge und Ressourcen zum Sparen zu bieten, sondern
+        auch eine Gemeinschaft, in der sie sich unterstützt und ermutigt fühlen.
+        Bei SpassSparen geht es nicht nur darum, Geld zu sparen - es geht darum, ein erfülltes und finanziell
+        gesundes Leben zu führen. Treten Sie unserer Gemeinschaft bei und erleben Sie, wie viel Spaß Sparen machen
+        kann!</p>
 </div>
 
-<template id="rank-result-template">
-    Hallo {{load('user').username}}, Sie sind <strong>{{rank}}th</strong> benutzer auf diese site.
-</template>
-<br>
-<br>
-<a href="registrierung.html"><button>Passwort ändern 🔑</button></a>
-<button hx-get="http://localhost:8080/delete-account"
-        hx-target="#status">Konto löschen ❌</button>
 </body>
 </html>
