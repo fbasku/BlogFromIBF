@@ -42,7 +42,7 @@ public class Kommentar {
     }
 
     public String getDatum() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         return datum.format(formatter);
     }
 
