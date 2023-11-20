@@ -61,10 +61,11 @@
 
                 <p class="kommentar-autor">{{ kommentar.verfasser.username }}
                     <span class="kommentar-datum">{{ kommentar.datum }} </span>
+                    {% if load('user').admin %}
                     <span class="bearbeiten-symbol">&#9998;</span>
                     <span class="löschen-symbol">&#10007;</span>
+                    {% endif %}
                 </p>
-
                 <p class="kommentar-inhalt">{{ kommentar.inhalt }} </p>
 
             </div>
