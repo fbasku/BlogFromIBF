@@ -34,7 +34,7 @@
                     <label for="password">Passwort</label>
                     <input type="password" id="password" name="password">
                     <br>
-                    <button type="submit">Submit</button>
+                    <button type="submit">Anmelden</button>
                     <div id="error-box-login"></div>
                     <p>Noch kein Mitglied? <a href="registrierung.html">Hier registrieren</a></p>
                 </form>
@@ -52,8 +52,8 @@
     {% else %}
     <p><strong>{{ username }}</strong>, du hast dich erfolgreich angemeldet</p>
 
-    {# Redirect to home after 3000ms #}
-    {{redirect("hauptseite.html",3000)}}
+    {# Redirect to alle_blog_artikel after 3000ms #}
+    {{redirect("alle_blog_artikel.html",3000)}}
     {% endif %}
 </template>
 
