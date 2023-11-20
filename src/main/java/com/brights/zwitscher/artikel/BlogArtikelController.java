@@ -5,8 +5,6 @@ import com.brights.zwitscher.kommentar.Kommentar;
 import com.brights.zwitscher.kommentar.KommentarRepository;
 import com.brights.zwitscher.kommentar.KommentarRequestDTO;
 import com.brights.zwitscher.user.User;
-import com.brights.zwitscher.user.UserDTO;
-import com.brights.zwitscher.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +20,12 @@ public class BlogArtikelController {
 
     private final BlogArtikelRepository blogRepository;
     private final KommentarRepository kommentarRepository;
-    private final UserRepository userRepository;
+
 
     @Autowired
-    public BlogArtikelController(BlogArtikelRepository blogRepository, KommentarRepository kommentarRepository, UserRepository userRepository) {
+    public BlogArtikelController(BlogArtikelRepository blogRepository, KommentarRepository kommentarRepository) {
         this.blogRepository = blogRepository;
         this.kommentarRepository = kommentarRepository;
-        this.userRepository = userRepository;
     }
 
     @GetMapping("/artikel")
@@ -75,47 +72,5 @@ public class BlogArtikelController {
                 blogArtikel.getVerfasser(),
                 blogArtikel.getKommentarList()
         );
-    }
-
-    @GetMapping("/users")
-    public ResponseEntity<List<UserDTO>> getAllUsers() {
-        try {
-            List<UserDTO> userDTOs = new ArrayList<>();
-            Iterable<User> allUsers = userRepository.findAll();
-
-            for (User user : allUsers) {
-                UserDTO userDTO = new UserDTO(user.getUsername(), user.isAdmin());
-                userDTOs.add(userDTO);
-            }
-
-            return ResponseEntity.ok(userDTOs);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
-
-    // Beispiel für die Behandlung von Datenbankfehlern
-    @ExceptionHandler(org.springframework.dao.DataAccessException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity<String> handleDatabaseException(org.springframework.dao.DataAccessException ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Database error occurred");
-    }
-
-    @PostMapping("/users/{username}")
-    public ResponseEntity<List<UserDTO>> aendereUserStatus(@PathVariable("username") String username) {
-        try {
-            User user = userRepository.findByUsername(username).orElse(null);
-
-            if (user == null) {
-                return ResponseEntity.notFound().build();
-            }
-
-            user.setAdmin(true);
-            userRepository.save(user);
-
-            return getAllUsers();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
     }
 }
