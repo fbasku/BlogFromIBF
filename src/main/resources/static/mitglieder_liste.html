@@ -14,35 +14,24 @@
     <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
     <script src="templates/javascript-helpers.js"></script>
 
-    <link rel="stylesheet" href="users.css">
+    <link rel="stylesheet" href="mitglieder_liste.css">
 </head>
 
 <body hx-ext="client-side-templates,response-targets,json-enc">
 
-<header>
-    <nav>
-        <ul class="menu-left">
-            <li><a href="/">Home</a></li>
-            <li><a href="/artikel">Artikel</a></li>
-            <li><a href="/meine-artikel">Meine Artikel</a></li>
-            <li><a href="/artikel-erstellen">Artikel erstellen</a></li>
-        </ul>
-        <ul class="menu-right">
-            <li><a href="/logout">Logout</a></li>
-        </ul>
-    </nav>
-</header>
 
-<div    hx-trigger="load"
-        hx-get="http://localhost:8080/user"
-        nunjucks-template="main-template"
-        hx-target-4*="#main"
-        hx-target="#main"
-        id="main">
+<div hx-trigger="load"
+     hx-get="http://localhost:8080/user"
+     nunjucks-template="main-template"
+     hx-target-4*="#main"
+     hx-target="#main"
+     id="main">
 </div>
+
 
 <template id="main-template">
     {% include "templates/check-session-invalid.html" %}
+    {% include "templates/navbar.html" %}
 
     <div hx-get="http://localhost:8080/users"
          hx-target="#output1"
@@ -82,7 +71,7 @@
                     hx-target="#main-template"
                     nunjucks-template="MitgliederListe"
                     class="status-button">
-                    Zum Admin befördern
+                Zum Admin befördern
             </button>
             {% else %}
             <button hx-post="http://localhost:8080/users/{{ user.username }}"
@@ -96,6 +85,7 @@
     </tr>
     {% endfor %}
 </template>
+
 
 </body>
 </html>

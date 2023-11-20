@@ -1,0 +1,174 @@
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.menu-left, .menu-right {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline;
+}
+
+.menu-left {
+    float: left;
+}
+
+.menu-right {
+    float: right;
+}
+
+nav ul li {
+    display: inline;
+    margin-left: 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #1da1f2;
+    font-weight: bold;
+    font-size: 1em;
+    padding: 5px 12px;
+    transition: background-color 0.3s, color 0.3s, border-radius 0.3s, padding 0.3s;
+}
+
+nav a:hover {
+    background-color: rgba(221, 221, 221, 0.8);
+    border-radius: 20px;
+    padding: 5px 12px;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    padding: 20px 0;
+}
+
+#Eintrag {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+article {
+    padding: 20px;
+    margin-bottom: 40px; /* Erhöhter Abstand zwischen Artikeln */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+article h2 {
+    text-align: center;
+    color: #1da1f2;
+}
+
+.autor-info {
+    font-size: 0.8em;
+    color: #888;
+    text-align: right; /* Rechtsbündige Ausrichtung */
+    margin-bottom: 5px; /* Verringert den Abstand */
+}
+
+.bearbeiten-symbol, .löschen-symbol {
+    font-size: 0.8em;
+    float: right;
+    color: #ddd; /* Unauffällige Farbe */
+    cursor: pointer;
+    margin-left: 5px;
+    margin-right: 7px;
+}
+
+.bearbeiten-symbol:hover {
+    color: #1da1f2; /* Auffällige Farbe beim Überfahren mit der Maus */
+}
+
+.löschen-symbol:hover {
+    color: #ff0000; /* Rote Farbe beim Hover */
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    margin: 10px auto;
+}
+
+.kommentar {
+    padding: 10px;
+    background-color: rgba(240, 240, 240, 0.9); /* Fast weißer, transparenter Hintergrund */
+    margin-bottom: 10px;
+    border-radius: 8px; /* Abgerundete Ecken */
+}
+
+.kommentar {
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+    margin: 1px; /* Reduzierter Abstand zwischen Kommentaren */
+}
+
+.kommentar:last-child {
+    border-bottom: none;
+}
+
+.kommentar-autor {
+    font-size: 0.9em;
+    font-weight: bold;
+    margin: -1px; /* Reduzierter Abstand zum Kommentarinhalt */
+}
+
+.kommentar-inhalt {
+    font-size: 0.9em;
+    margin-top: 2px;
+}
+
+.kommentar-datum {
+    font-size: 0.8em;
+    float: right; /* Platzierung rechts */
+    color: #666;
+    margin-left: 10px; /* Abstand zwischen Autor und Datum */
+}
+
+textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: #1da1f2;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0d8dd8;
+}
+
+form {
+    clear: both;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}

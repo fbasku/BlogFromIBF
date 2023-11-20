@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hauptseite</title>
+    <link rel="stylesheet" href="hauptseite.css">
+
+    <!-- Externe Skripte -->
+    <script src="https://unpkg.com/htmx.org@1.9.3"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/client-side-templates.js"></script>
+    <script src="https://unpkg.com/nunjucks@latest"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
+    <script src="templates/javascript-helpers.js"></script>
+</head>
+
+<body hx-ext="client-side-templates,response-targets,json-enc">
+
+<div hx-trigger="load"
+     hx-get="http://localhost:8080/user"
+     nunjucks-template="main-template"
+     hx-target-4*="#main"
+     hx-target="#main"
+     id="main">
+</div>
+
+<template id="main-template">
+    {% include "templates/check-session-invalid.html" %}
+    {% include "templates/navbar.html" %}
+    <!-- Inhalt der Hauptseite hier -->
+
+    <div class="content">
+
+        <section class="welcome-section">
+            <h1>Willkommen auf unserer Plattform!</h1>
+            <p>Entdecken Sie die neuesten Artikel, teilen Sie Ihre Gedanken und vernetzen Sie sich mit anderen.</p>
+        </section>
+
+
+        <section class="latest-articles">
+            <h2>Neueste Artikel</h2>
+            <!-- Artikel-Kacheln oder Liste hier einfügen -->
+        </section>
+        <!-- Weitere Sektionen nach Bedarf hinzufügen -->
+
+    </div>
+
+</template>
+
+</body>
+</html>

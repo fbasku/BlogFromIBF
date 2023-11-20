@@ -1,0 +1,96 @@
+/* Allgemeine Stile */
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Stile */
+header {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.menu-left, .menu-right {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline;
+}
+
+.menu-left {
+    float: left;
+}
+
+.menu-right {
+    float: right;
+}
+
+header nav ul li {
+    display: inline;
+    margin-left: 15px;
+}
+
+header nav a {
+    text-decoration: none;
+    color: #1da1f2;
+    font-weight: bold;
+    font-size: 1em;
+    padding: 5px 12px;
+    transition: background-color 0.3s, color 0.3s, border-radius 0.3s, padding 0.3s;
+}
+
+header nav a:hover {
+    background-color: rgba(221, 221, 221, 0.8);
+    border-radius: 20px;
+    padding: 5px 12px;
+}
+
+/* Stile für Hauptinhaltsbereich */
+.content {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.welcome-section {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.welcome-section h1 {
+    font-size: 2.5em;
+    color: #1da1f2;
+}
+
+.welcome-section p {
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+
+.latest-articles {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.latest-articles h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Weitere spezifische Stile für Artikel-Kacheln, Listen und andere Elemente */
+/* ... */

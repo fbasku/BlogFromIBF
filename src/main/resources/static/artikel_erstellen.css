@@ -1,3 +1,4 @@
+/* Allgemeine Stile */
 body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color: #f4f4f4;
@@ -7,21 +8,16 @@ body {
     padding: 0;
 }
 
-h2 {
-    color: #333;
-    text-align: center; /* Zentriert den Titel */
-}
-
 header {
     background-color: #fff;
     border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
 }
 
 nav {
     max-width: 1200px;
     margin: 0 auto;
     overflow: hidden;
-    padding: 10px 20px;
 }
 
 .menu-left, .menu-right {
@@ -50,17 +46,18 @@ header nav a {
     font-weight: bold;
     font-size: 1em;
     padding: 5px 12px;
-    border-radius: 0px;
-    transition: background-color 0.3s, color 0.3s, border-radius 0.3s, padding 0.3s;
+    border-radius: 0px; /* Standardmäßig keine abgerundeten Ecken */
+    transition: background-color 0.3s, color 0.3s, border-radius 0.3s, padding 0.3s; /* Übergänge für mehrere Eigenschaften */
 }
 
 header nav a:hover {
     background-color: rgba(221, 221, 221, 0.8);
-    border-radius: 20px;
-    padding: 5px 12px;
+    border-radius: 20px; /* Abgerundete Ecken beim Hover */
+    padding: 5px 12px; /* Konsistentes Padding */
 }
 
-#main, #create-post {
+/* Spezifische Stile für Benutzerverwaltung */
+#create-post {
     max-width: 600px;
     margin: 20px auto;
     padding: 20px;
@@ -73,6 +70,11 @@ label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+}
+
+h2 {
+    color: #333;
+    text-align: center; /* Zentriert den Titel */
 }
 
 input[type="text"],
