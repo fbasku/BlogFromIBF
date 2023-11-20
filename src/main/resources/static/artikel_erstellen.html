@@ -37,7 +37,7 @@
 
     <div id="create-post">
         <h2>Erstelle einen Post</h2>
-        <form id="post-form">
+        <form id="post-form" hx-post="http://localhost:8080/path-to-your-endpoint" hx-target="#some-target">
             <div>
                 <label for="post-title">Titel:</label>
                 <input type="text" id="post-title" name="title" required placeholder="Der Anfang ist alles...">
@@ -57,6 +57,7 @@
             </div>
         </form>
     </div>
+
 
 </template>
 
