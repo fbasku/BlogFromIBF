@@ -32,6 +32,7 @@ nav {
 
 .menu-right {
     float: right;
+    padding-right: 20px;
 }
 
 nav ul li {
@@ -61,7 +62,8 @@ h1 {
 }
 
 #Eintrag {
-    max-width: 800px;
+    max-width: 1000px;
+    border-radius: 8px;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
@@ -70,6 +72,7 @@ h1 {
 
 article {
     padding: 20px;
+    border-radius: 8px;
     margin-bottom: 40px; /* Erhöhter Abstand zwischen Artikeln */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -114,12 +117,7 @@ img {
     background-color: rgba(240, 240, 240, 0.9); /* Fast weißer, transparenter Hintergrund */
     margin-bottom: 10px;
     border-radius: 8px; /* Abgerundete Ecken */
-}
-
-.kommentar {
-    padding: 5px;
     border-bottom: 1px solid #ddd;
-    margin: 1px; /* Reduzierter Abstand zwischen Kommentaren */
 }
 
 .kommentar:last-child {
