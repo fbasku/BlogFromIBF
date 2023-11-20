@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -17,7 +18,7 @@ public class BlogArtikel {
     private String titel;
     @Size(min = 25, max = 500)
     private String inhalt;
-    private Instant datum;
+    private LocalDate datum;
     private String  bildUrl;
     @ManyToOne
     private User verfasser;
@@ -32,7 +33,7 @@ public class BlogArtikel {
         this.inhalt = inhalt;
         this.verfasser = user;
         this.bildUrl = bildUrl;
-        this.datum = Instant.now();
+        this.datum = LocalDate.now();
     }
 
     public Long getId() {
@@ -75,11 +76,11 @@ public class BlogArtikel {
         this.bildUrl = bildUrl;
     }
 
-    public Instant getDatum() {
+    public LocalDate getDatum() {
         return datum;
     }
 
-    public void setDatum(Instant datum) {
+    public void setDatum(LocalDate datum) {
         this.datum = datum;
     }
 

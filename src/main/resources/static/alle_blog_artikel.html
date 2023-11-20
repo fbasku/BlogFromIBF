@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mitglieder</title>
+    <title>Blog-Artikel</title>
 
     <script src="https://unpkg.com/htmx.org@1.9.3"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/client-side-templates.js"></script>
@@ -13,51 +13,75 @@
     <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
     <script src="templates/javascript-helpers.js"></script>
-    <link rel="stylesheet" href="artikel.css">
+
+    <link rel="stylesheet" href="alle_blog_artikel.css">
 </head>
+
+
 <body hx-ext="client-side-templates, response-targets, json-enc">
-<div class="navbar">
-    <a href="home.html">Startseite</a>
+
+
+<div hx-trigger="load"
+     hx-get="http://localhost:8080/user"
+     nunjucks-template="main-template"
+     hx-target-4*="#main"
+     hx-target="#main"
+     id="main">
 </div>
+
+<template id="main-template">
+    {% include "templates/check-session-invalid.html" %}
+    {% include "templates/navbar.html" %}
+
 <h1>Willkommen zum Blog</h1>
-<div hx-get="http://localhost:8080/artikel"
-     hx-target="#Eintrag"
-     nunjucks-template="Blog-template"
-     hx-trigger="load"></div>
-<section id="Eintrag">
-    <!-- Hier werden die Blogeinträge geladen -->
-</section>
+
+    <div hx-get="http://localhost:8080/artikel"
+         hx-target="#Eintrag"
+         nunjucks-template="Blog-template"
+         hx-trigger="load"></div>
+    <section id="Eintrag">
+        <!-- Hier werden die Blogeinträge geladen -->
+    </section>
+</template>
+
 
 <template id="Blog-template">
     {% for eintrag in list() %}
-    <a href="artikel-bearbeitung.html"><button class="button-link">Artikel Bearbeiten</button></a>
+
     <article>
+
         <h2>{{ eintrag.titel }}</h2>
+        <p class="autor-info"> <em>{{ eintrag.verfasser.username }}</em> <span>{{eintrag.datum}}</span></p>
+        <img src="{{ eintrag.bildUrl }}" alt="{{eintrag.titel}}">
         <p>{{ eintrag.inhalt }}</p>
-        <div><img src="{{ eintrag.bildUrl }}" width="500rem" alt="{{eintrag.titel}}"></div>
 
         <section class="kommentare">
-            {% for kommentar in eintrag.kommentare  %}
-            <hr>
-            <button class="button-link">Kommentar Bearbeiten</button>
-            <br>
+            {% for kommentar in eintrag.kommentare %}
             <div class="kommentar">
-                <p>{{ kommentar.verfasser.username }}: {{ kommentar.inhalt }}</p>
-                <span>{{ kommentar.datum }}</span>
+
+                <p class="kommentar-autor">{{ kommentar.verfasser.username }}
+                    <span class="kommentar-datum">{{ kommentar.datum }} </span>
+                    <span class="bearbeiten-symbol">&#9998;</span>
+                    <span class="löschen-symbol">&#10007;</span>
+                </p>
+
+                <p class="kommentar-inhalt">{{ kommentar.inhalt }} </p>
+
             </div>
             {% endfor %}
         </section>
 
-        <!-- Das Formular sendet den Kommentar und aktualisiert die ganze Artikel- und Kommentarliste -->
         <form hx-post="http://localhost:8080/kommentar" hx-target="#Eintrag" nunjucks-template="Blog-template">
             <input type="hidden" name="blogArtikelId" value="{{ eintrag.id }}">
             <textarea name="inhalt" placeholder="Ihr Kommentar" required></textarea>
             <input type="submit" value="Kommentar hinzufügen">
         </form>
-        <hr>
+
     </article>
+
     {% endfor %}
 </template>
 
 </body>
+
 </html>

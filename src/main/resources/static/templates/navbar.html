@@ -1,13 +1,25 @@
-<nav>
-    <a href="home.html">Home</a> ||
-    <!-- Manually trigger logout via button -->
-    <button hx-post="http://localhost:8080/logout"
-            nunjucks-template="logout-triggered"
-            hx-target="#logout" id="logout">Logout 🚪</button>
-</nav>
+<header>
+    <nav>
+        <ul class="menu-left">
+            <li><a href="/hauptseite.html">Home</a></li>
+            <li><a href="/alle_blog_artikel.html">Artikel</a></li>
+            <li><a href="/meine-artikel">Meine Artikel</a></li>
+            <li><a href="/artikel_erstellen.html">Artikel erstellen</a></li>
+            <li><a href="/mitglieder_liste.html">Mitglieder</a></li>
+        </ul>
+        <ul class="menu-right">
+            <li id="logout">
+                <a href="#" hx-post="http://localhost:8080/logout"
+                   nunjucks-template="logout-triggered"
+                   hx-target="#logout">Logout</a>
+            </li>
 
-<template id="logout-triggered">
-    Logout 🏃 <strong>Redirecting ...</strong>
-    <span>Good by {{username}}</span>
-    {{redirect("index.html",500)}}
+        </ul>
+    </nav>
+</header>
+
+<template id="logout-triggered" class="logout-message">
+    Sie werden <strong>ausgeloggt ...</strong>
+    <span>Auf Wiedersehen, {{username}}</span>
+    {{redirect("index.html",1000)}}
 </template>
