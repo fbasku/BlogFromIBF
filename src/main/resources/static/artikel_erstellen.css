@@ -128,3 +128,15 @@ button[type="button"] {
 button[type="button"]:hover {
     background: #555;
 }
+
+.post-response-message {
+    margin-top: 30px;
+    text-align: center; /* Text zentrieren */
+    font-size: 1.5em; /* Schriftgröße anpassen */
+    color: #333; /* Textfarbe */
+
+    max-width: 80%; /* Maximale Breite */
+    margin-left: auto; /* Zentrierung */
+    margin-right: auto; /* Zentrierung */
+}
+
