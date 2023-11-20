@@ -33,7 +33,7 @@
     {% include "templates/check-session-invalid.html" %}
     {% include "templates/navbar.html" %}
 
-<h1>Willkommen zum Blog</h1>
+    <h1>Willkommen auf unserer Plattform!</h1>
 
     <div hx-get="http://localhost:8080/artikel"
          hx-target="#Eintrag"
@@ -51,7 +51,7 @@
     <article>
 
         <h2>{{ eintrag.titel }}</h2>
-        <p class="autor-info"> <em>{{ eintrag.verfasser.username }}</em> <span>{{eintrag.datum}}</span></p>
+        <p class="autor-info"><em>{{ eintrag.verfasser.username }}</em> <span>{{eintrag.datum}}</span></p>
         <img src="{{ eintrag.bildUrl }}" alt="{{eintrag.titel}}">
         <p>{{ eintrag.inhalt }}</p>
 

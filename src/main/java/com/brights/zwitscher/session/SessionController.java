@@ -44,7 +44,7 @@ public class    SessionController {
         }
 
         // When login-does not work
-        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No such username or wrong password");
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Benutzername oder Passwort ist falsch");
     }
 
     @PostMapping("/logout")

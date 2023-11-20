@@ -30,11 +30,11 @@ public class DataLoader implements ApplicationRunner {
 
     public void run(ApplicationArguments args) {
         // Create user
-        User user1 = new User("user1", "12345");
+        User user1 = new User("User1", "12345");
         userRepository.save(user1);
 
         // Create admin
-        User user2= new User("admin","12345");
+        User user2= new User("Admin","12345");
         user2.setAdmin(true);
         userRepository.save(user2);;
 
@@ -61,25 +61,27 @@ public class DataLoader implements ApplicationRunner {
             userRepository.save(user);
         }
 
-        BlogArtikel blogArtikel1 = new BlogArtikel( "Die Auswirkungen der Zinserhöhung auf Kredite und Spareinlagen",
-                "Angesichts der jüngsten Zinserhöhung durch die Europäische Zentralbank untersuchen wir, wie sich dies auf Kredite und Spareinlagen auswirkt. Höhere Zinsen können sowohl Vorteile für Sparer als auch Herausforderungen für Kreditnehmer bedeuten. In diesem Artikel betrachten wir verschiedene Szenarien und geben Tipps, wie man sich am besten anpasst.",
-                user1, "bildurl"
-        );
-        blogArtikelRepository.save(blogArtikel1);
+
 
         BlogArtikel blogArtikel2 = new BlogArtikel(
                 "Nachhaltige Investments: Trend oder Zukunft?",
                 "Nachhaltige Investments gewinnen an Beliebtheit. Doch handelt es sich dabei nur um einen kurzfristigen Trend oder ist Nachhaltigkeit ein dauerhafter Bestandteil der Finanzwelt? Dieser Artikel beleuchtet die Entwicklung grüner Investments und deren langfristige Auswirkungen auf den Markt.",
-                user2, "bildurl"
+                user2, "https://finment.com/wp-content/uploads/2021/06/nachhaltige-aktien-2021_gruene_aktien_energie_aktien_cleantech-aktien_aktien-der-zukunft_aktien-erneuerbare-energien_header.jpg"
         );
         blogArtikelRepository.save(blogArtikel2);
 
         BlogArtikel blogArtikel3 = new BlogArtikel(
                 "Kryptowährungen: Risiken und Chancen",
                 "Kryptowährungen sind ein heißes Thema in der Finanzwelt. Doch welche Risiken und Chancen sind mit dieser neuen Art von Währung verbunden? In diesem Artikel analysieren wir die Volatilität, die Sicherheitsaspekte und das Potenzial von Kryptowährungen im aktuellen Wirtschaftsklima.",
-                admin2, "bildurl"
+                admin2, "https://coinsundtokens.com/wp-content/uploads/2020/02/Kryptow%C3%A4hrungen.jpg"
         );
         blogArtikelRepository.save(blogArtikel3);
+
+        BlogArtikel blogArtikel1 = new BlogArtikel( "Die Auswirkungen der Zinserhöhung auf Kredite und Spareinlagen",
+                "Angesichts der jüngsten Zinserhöhung durch die Europäische Zentralbank untersuchen wir, wie sich dies auf Kredite und Spareinlagen auswirkt. Höhere Zinsen können sowohl Vorteile für Sparer als auch Herausforderungen für Kreditnehmer bedeuten. In diesem Artikel betrachten wir verschiedene Szenarien und geben Tipps, wie man sich am besten anpasst.",
+                user1, "https://i0.web.de/image/492/38175492,pd=2/europaeische-zentralbank-frankfurt-main.jpg"
+        );
+        blogArtikelRepository.save(blogArtikel1);
 
         // Kommentare
         kommentarRepository.save(new Kommentar(user1, "Interessanter Artikel! Gute Zeit, um Sparanlagen zu überdenken.", blogArtikel1));
@@ -106,7 +108,7 @@ public class DataLoader implements ApplicationRunner {
         BlogArtikel blogArtikel4 = new BlogArtikel("Sparen für den Ruhestand: Ein Leitfaden","Der Ruhestand mag noch weit entfernt sein, aber es ist nie zu früh,\n" +
                 "um mit dem Sparen zu beginnen. In diesem Blog werden wir verschiedene\n" +
                 "Sparstrategien für den Ruhestand vorstellen und Tipps geben, wie man am\n" +
-                "besten für die goldenen Jahre vorsorgen kann.",user1,"https://png.pngtree.com/png-clipart/20230118/original/pngtree-financial-funnel-depositing-money-png-image_8920264.png");
+                "besten für die goldenen Jahre vorsorgen kann.",user1,"https://www.moneycontroller.de/upload/community/fr-den-ruhestand-vorsorgen-wann-sollte-m-20231023073352.jpg");
         BlogArtikel blogArtikel5 = new BlogArtikel("Die Zukunft der Kryptowährungen",
                 "Kryptowährungen untersuchen und wie sie die Finanzlandschaft verändern könnten.\n" +
                 "Wir werden auch die Risiken und Chancen diskutieren, die mit dem Investieren\n" +

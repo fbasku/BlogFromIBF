@@ -61,9 +61,15 @@ header nav a:hover {
     padding: 5px 12px; /* Konsistentes Padding */
 }
 
+h1 {
+    color: #333;
+    text-align: center;
+    padding: 20px 0;
+}
+
 /* Spezifische Stile für Benutzerverwaltung */
 #create-post {
-    max-width: 600px;
+    max-width: 1000px;
     margin: 20px auto;
     padding: 20px;
     background: #fff;
@@ -109,7 +115,7 @@ textarea:focus {
     border-color: #aaa;
 }
 
-button {
+button, .button {
     display: inline-block;
     background: #1da1f2;
     color: #fff;

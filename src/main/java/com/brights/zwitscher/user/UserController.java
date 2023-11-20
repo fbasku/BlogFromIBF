@@ -28,7 +28,7 @@ public class UserController {
     @GetMapping("/user")
     public UserDTO user(@ModelAttribute("sessionUser") Optional<User> sessionUserOptional) {
         User sessionUser = sessionUserOptional
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No valid login"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Kein valider Login"));
         return new UserDTO(sessionUser.getUsername(), sessionUser.isAdmin());
     }
 
@@ -36,7 +36,7 @@ public class UserController {
     public RegistrierungResponseDTO registrieren(@RequestBody @Valid RegistrierungRequestDTO registrieren, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Benutzername oder Passwort ist falsch");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Benutzername muss zwischen 4 und 15 Zeichen lang sein");
         }
 
         if (!registrieren.arePasswordsMatching()) {
