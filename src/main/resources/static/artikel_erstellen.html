@@ -38,26 +38,27 @@
 
     <div id="create-post">
 
-        <form id="post-form">
+        <form id="post-form" hx-post="http://localhost:8080/artikel">
             <div>
                 <label for="post-title">Titel:</label>
-                <input type="text" id="post-title" name="title" required placeholder="Der Anfang ist alles...">
+                <input type="text" id="post-title" name="titel" required placeholder="Der Anfang ist alles...">
             </div>
             <div>
                 <label for="post-content">Inhalt:</label>
-                <textarea id="post-content" name="content" required
+                <textarea id="post-content" name="inhalt" required
                           placeholder="Erzählen Sie Ihre Geschichte, teilen Sie Ihr Wissen oder inspirieren Sie andere..."></textarea>
             </div>
             <div>
                 <label for="post-image-url">Bild-URL (optional):</label>
-                <input type="url" id="post-image-url" name="imageUrl">
+                <input type="url" id="post-image-url" name="bildUrl">
             </div>
             <div>
-                <button type="submit">Post erstellen</button>
+                <input class="button" type="submit" value="Post erstellen">
                 <button type="button" onclick="cancelPost()">Abbrechen</button>
             </div>
         </form>
     </div>
+
 
 </template>
 

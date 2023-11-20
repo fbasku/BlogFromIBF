@@ -16,7 +16,7 @@ public class BlogArtikel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titel;
-    @Size(min = 25, max = 500)
+    @Size(min = 5, max = 500)
     private String inhalt;
     private LocalDate datum;
     private String  bildUrl;

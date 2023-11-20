@@ -5,14 +5,14 @@ import com.brights.zwitscher.kommentar.Kommentar;
 import com.brights.zwitscher.kommentar.KommentarRepository;
 import com.brights.zwitscher.kommentar.KommentarRequestDTO;
 import com.brights.zwitscher.user.User;
-import com.brights.zwitscher.user.UserDTO;
-import com.brights.zwitscher.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,13 +22,12 @@ public class BlogArtikelController {
 
     private final BlogArtikelRepository blogRepository;
     private final KommentarRepository kommentarRepository;
-    private final UserRepository userRepository;
+
 
     @Autowired
-    public BlogArtikelController(BlogArtikelRepository blogRepository, KommentarRepository kommentarRepository, UserRepository userRepository) {
+    public BlogArtikelController(BlogArtikelRepository blogRepository, KommentarRepository kommentarRepository) {
         this.blogRepository = blogRepository;
         this.kommentarRepository = kommentarRepository;
-        this.userRepository = userRepository;
     }
 
     @GetMapping("/artikel")
@@ -40,7 +39,33 @@ public class BlogArtikelController {
             BlogArtikelDTO dto = convertToDTO(blogArtikel);
             dtoListe.add(dto);
         }
+        dtoListe.sort(Comparator.comparing(BlogArtikelDTO::getId, Comparator.reverseOrder()));
+
         return dtoListe;
+    }
+
+    @PostMapping("/artikel")
+    public ResponseEntity<String> erstelleArtikel(@RequestBody BlogArtikelRequestDTO artikelDTO,
+                                                  @ModelAttribute("sessionUser") Optional<User> sessionUser) {
+        if (!sessionUser.isPresent()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Benutzer ist nicht angemeldet.");
+        }
+
+        // Standardbild, falls keine Bild-URL angegeben ist
+        String bildUrl = artikelDTO.getBildUrl();
+        if (bildUrl.isEmpty()){
+            bildUrl = "https://i.computer-bild.de/imgs/1/4/9/1/3/2/3/7/cb-finanzen-newsletter-a-a331c5e14e8a5164.jpg?impolicy=full_content";
+        }
+
+        BlogArtikel neuerArtikel = new BlogArtikel(
+                artikelDTO.getTitel(),
+                artikelDTO.getInhalt(),
+                sessionUser.get(),
+                bildUrl
+        );
+        blogRepository.save(neuerArtikel);
+
+        return ResponseEntity.ok("Ihr Artikel wurde erfolgreich hinzugefügt.");
     }
 
     @PostMapping("/kommentar")
@@ -63,6 +88,8 @@ public class BlogArtikelController {
         return ResponseEntity.ok(bekommeAlleArtikel());
     }
 
+
+
     // Hilfsmethode zur Konvertierung von BlogArtikel zu BlogArtikelDTO
     private BlogArtikelDTO convertToDTO(BlogArtikel blogArtikel) {
 
@@ -75,47 +102,5 @@ public class BlogArtikelController {
                 blogArtikel.getVerfasser(),
                 blogArtikel.getKommentarList()
         );
-    }
-
-    @GetMapping("/users")
-    public ResponseEntity<List<UserDTO>> getAllUsers() {
-        try {
-            List<UserDTO> userDTOs = new ArrayList<>();
-            Iterable<User> allUsers = userRepository.findAll();
-
-            for (User user : allUsers) {
-                UserDTO userDTO = new UserDTO(user.getUsername(), user.isAdmin());
-                userDTOs.add(userDTO);
-            }
-
-            return ResponseEntity.ok(userDTOs);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
-
-    // Beispiel für die Behandlung von Datenbankfehlern
-    @ExceptionHandler(org.springframework.dao.DataAccessException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity<String> handleDatabaseException(org.springframework.dao.DataAccessException ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Database error occurred");
-    }
-
-    @PostMapping("/users/{username}")
-    public ResponseEntity<List<UserDTO>> aendereUserStatus(@PathVariable("username") String username) {
-        try {
-            User user = userRepository.findByUsername(username).orElse(null);
-
-            if (user == null) {
-                return ResponseEntity.notFound().build();
-            }
-
-            user.setAdmin(true);
-            userRepository.save(user);
-
-            return getAllUsers();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
     }
 }
