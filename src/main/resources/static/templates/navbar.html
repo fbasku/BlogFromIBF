@@ -1,9 +1,19 @@
 <header>
     <nav>
         <ul class="menu-left">
+            {% if admin %}
+            <li><a href="/alle_blog_artikel_admin.html">Home</a></li>
+            {% else %}
             <li><a href="/alle_blog_artikel.html">Home</a></li>
+            {% endif %}
+
             <li><a href="/artikel_erstellen.html">Artikel erstellen</a></li>
+
+            {% if admin %}
+            <li><a href="/mitglieder_liste_admin.html">Mitglieder</a></li>
+            {% else %}
             <li><a href="/mitglieder_liste.html">Mitglieder</a></li>
+            {% endif %}
         </ul>
         <ul class="menu-right">
             <li id="logout">

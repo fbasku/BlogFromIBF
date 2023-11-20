@@ -48,6 +48,7 @@
                 <th>#</th>
                 <th>Nutzername</th>
                 <th>Rolle</th>
+                <th>Aktion</th>
             </tr>
             <tbody id="output1">
             </tbody>
@@ -65,6 +66,22 @@
             Administrator
             {% else %}
             Benutzer
+            {% endif %}
+        </td>
+        <td> {% if not user.admin %}
+            <button hx-post="http://localhost:8080/users/{{ user.username }}"
+                    hx-target="#main-template"
+                    nunjucks-template="MitgliederListe"
+                    class="status-button">
+                Zum Admin befördern
+            </button>
+            {% else %}
+            <button hx-post="http://localhost:8080/users/{{ user.username }}"
+                    hx-target="#main-template"
+                    nunjucks-template="MitgliederListe"
+                    class="status-buttonAdmin">
+                Adminrechte entziehen
+            </button>
             {% endif %}
         </td>
     </tr>
