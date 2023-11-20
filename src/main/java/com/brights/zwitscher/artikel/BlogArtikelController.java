@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +39,33 @@ public class BlogArtikelController {
             BlogArtikelDTO dto = convertToDTO(blogArtikel);
             dtoListe.add(dto);
         }
+        dtoListe.sort(Comparator.comparing(BlogArtikelDTO::getId, Comparator.reverseOrder()));
+
         return dtoListe;
+    }
+
+    @PostMapping("/artikel")
+    public ResponseEntity<String> erstelleArtikel(@RequestBody BlogArtikelRequestDTO artikelDTO,
+                                                  @ModelAttribute("sessionUser") Optional<User> sessionUser) {
+        if (!sessionUser.isPresent()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Benutzer ist nicht angemeldet.");
+        }
+
+        // Standardbild, falls keine Bild-URL angegeben ist
+        String bildUrl = artikelDTO.getBildUrl();
+        if (bildUrl.isEmpty()){
+            bildUrl = "https://i.computer-bild.de/imgs/1/4/9/1/3/2/3/7/cb-finanzen-newsletter-a-a331c5e14e8a5164.jpg?impolicy=full_content";
+        }
+
+        BlogArtikel neuerArtikel = new BlogArtikel(
+                artikelDTO.getTitel(),
+                artikelDTO.getInhalt(),
+                sessionUser.get(),
+                bildUrl
+        );
+        blogRepository.save(neuerArtikel);
+
+        return ResponseEntity.ok("Ihr Artikel wurde erfolgreich hinzugefügt.");
     }
 
     @PostMapping("/kommentar")
@@ -59,6 +87,8 @@ public class BlogArtikelController {
 
         return ResponseEntity.ok(bekommeAlleArtikel());
     }
+
+
 
     // Hilfsmethode zur Konvertierung von BlogArtikel zu BlogArtikelDTO
     private BlogArtikelDTO convertToDTO(BlogArtikel blogArtikel) {
