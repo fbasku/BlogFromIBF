@@ -38,14 +38,18 @@
 
     <div id="create-post">
 
-        <form id="post-form" hx-post="http://localhost:8080/artikel">
+        <form id="post-form"
+              hx-post="http://localhost:8080/artikel"
+              nunjucks-template="post-response-template"
+              hx-target="#post-response-message"
+              >
             <div>
                 <label for="post-title">Titel:</label>
                 <input type="text" id="post-title" name="titel" required placeholder="Der Anfang ist alles...">
             </div>
             <div>
                 <label for="post-content">Inhalt:</label>
-                <textarea id="post-content" name="inhalt" required
+                <textarea class="post-content" id="post-content" name="inhalt" required
                           placeholder="Erzählen Sie Ihre Geschichte, teilen Sie Ihr Wissen oder inspirieren Sie andere..."></textarea>
             </div>
             <div>
@@ -54,17 +58,20 @@
             </div>
             <div>
                 <input class="button" type="submit" value="Post erstellen">
-                <button type="button" onclick="window.location.href='/alle_blog_artikel.html'">Abbrechen</button>
             </div>
         </form>
     </div>
-
-
 </template>
 
-<script>
+<div id="post-response-message" class="post-response-message"></div>
 
-</script>
+<template id="post-response-template">
+    <div>
+        <h4>Ihr Artikel wurde erfolgreich hinzugefügt!</h4>
+        {{ redirect("/alle_blog_artikel.html", 3500) }}
+    </div>
+</template>
+
 
 </body>
 </html>
