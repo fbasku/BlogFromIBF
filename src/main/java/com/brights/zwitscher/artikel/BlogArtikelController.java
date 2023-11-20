@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping()
+@RequestMapping("/artikel")
 public class BlogArtikelController {
 
     private final BlogArtikelRepository blogRepository;
@@ -30,7 +30,7 @@ public class BlogArtikelController {
         this.kommentarRepository = kommentarRepository;
     }
 
-    @GetMapping("/artikel")
+    @GetMapping()
     public List<BlogArtikelDTO> bekommeAlleArtikel() {
         Iterable<BlogArtikel> blogArtikelListe = blogRepository.findAll();
         List<BlogArtikelDTO> dtoListe = new ArrayList<>();
@@ -44,11 +44,11 @@ public class BlogArtikelController {
         return dtoListe;
     }
 
-    @PostMapping("/artikel")
-    public ResponseEntity<String> erstelleArtikel(@RequestBody BlogArtikelRequestDTO artikelDTO,
+    @PostMapping()
+    public ResponseEntity<BlogArtikelResponseDTO> erstelleArtikel(@RequestBody BlogArtikelRequestDTO artikelDTO,
                                                   @ModelAttribute("sessionUser") Optional<User> sessionUser) {
         if (!sessionUser.isPresent()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Benutzer ist nicht angemeldet.");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
         // Standardbild, falls keine Bild-URL angegeben ist
@@ -65,18 +65,19 @@ public class BlogArtikelController {
         );
         blogRepository.save(neuerArtikel);
 
-        return ResponseEntity.ok("Ihr Artikel wurde erfolgreich hinzugefügt.");
+        return ResponseEntity.ok(new BlogArtikelResponseDTO("Ihr Artikel wurde erfolgreich hinzugefügt"));
     }
 
-    @PostMapping("/kommentar")
+    @PostMapping("/kommentar/{eintrag}")
     public ResponseEntity<List<BlogArtikelDTO>> erstelleKommentar(@RequestBody KommentarRequestDTO kommentarDTO,
+                                                                  @PathVariable("eintrag") Long eintrag,
                                                                   @ModelAttribute("sessionUser") Optional<User> sessionUser) {
         if (!sessionUser.isPresent()) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
         User user = sessionUser.get();
-        BlogArtikel blogArtikel = blogRepository.findById(kommentarDTO.getBlogArtikelId()).orElse(null);
+        BlogArtikel blogArtikel = blogRepository.findById(eintrag).orElse(null);
 
         if (blogArtikel == null) {
             return ResponseEntity.badRequest().build();
