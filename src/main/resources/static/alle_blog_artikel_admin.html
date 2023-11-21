@@ -71,8 +71,7 @@
             {% endfor %}
         </section>
 
-        <form hx-post="http://localhost:8080/kommentar" hx-target="#Eintrag" nunjucks-template="Blog-template">
-            <input type="hidden" name="blogArtikelId" value="{{ eintrag.id }}">
+        <form hx-post="http://localhost:8080/artikel/kommentar/{{eintrag.id}}" hx-target="#Eintrag" nunjucks-template="Blog-template">
             <textarea name="inhalt" placeholder="Ihr Kommentar" required></textarea>
             <input type="submit" value="Kommentar hinzufügen">
         </form>
